@@ -13,4 +13,4 @@ start_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 @start_router.message(Command(commands='start'))
 async def start_handler(message: types.Message):
     handler(__name__, type=message)
-    await message.answer(text="<b>Добро пожаловать в бот советской математики и программирования!</b>", reply_markup=InlineKeyboards().start())
+    await message.answer(text="<b>Салам алейкум, это бот советской математики и программирования!</b>", reply_markup=InlineKeyboards().start())
