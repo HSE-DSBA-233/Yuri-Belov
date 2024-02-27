@@ -19,4 +19,3 @@ class InlineKeyboards:
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
-
