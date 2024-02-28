@@ -1,9 +1,20 @@
+"""
+Logging Utilities.
+
+This module provides utilities for setting up and handling logging in the bot application. 
+
+Functions:
+    set_logger: Sets up the logger configuration.
+    handler: Logs information from user messages or callbacks.
+"""
+
 import typing
 from loguru import logger
 from aiogram import types
 
 
 def set_logger() -> None:
+    # Set up logger configuration, logs are stored in ./logs.log
     return logger.add(
         sink="./logs.log",
         enqueue=False,
@@ -16,6 +27,7 @@ def handler(
         func,
         type: typing.Union[types.Message, types.CallbackQuery],
 ) -> None:
+    
     """log info from user message/callback
 
     args:

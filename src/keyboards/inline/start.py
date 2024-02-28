@@ -1,3 +1,12 @@
+"""
+Inline Keyboards Module.
+
+This module provides a class for generating inline keyboards with various buttons.
+
+Classes:
+    InlineKeyboards: Generates inline keyboards with predefined buttons.
+"""
+
 from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 

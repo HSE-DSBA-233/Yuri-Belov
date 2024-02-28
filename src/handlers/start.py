@@ -1,6 +1,14 @@
-"""/start command handler."""
+"""
+Start Command Handler Module.
 
-from aiogram import Router, types, F
+This module contains a handler for the /start command. It responds with a welcome message and an inline keyboard
+in private chats.
+
+Functions:
+    start_handler: Handles the /start command by sending a welcome message and an inline keyboard.
+"""
+
+from aiogram import Router, types
 from aiogram.filters import Command
 from utils.logging import handler
 from keyboards.inline.start import InlineKeyboards

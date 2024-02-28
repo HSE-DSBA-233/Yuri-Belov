@@ -1,4 +1,11 @@
-"""/history command handler."""
+"""
+History Command Handler Module.
+
+This module contains a handler for the /history command.
+
+Functions:
+    history_callback_handler: Handles the callback query "history" by responding with a message indicating history.
+"""
 
 from aiogram import Router, types, F
 from aiogram.filters import Command
