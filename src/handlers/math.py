@@ -9,6 +9,6 @@ math_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 
 @math_router.callback_query(F.data == "math")
-async def start_callback_handler(callback: types.CallbackQuery):
+async def math_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
-    await callback.message.answer("Math.")
+    await callback.message.edit_text("Математика")

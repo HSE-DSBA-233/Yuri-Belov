@@ -22,7 +22,7 @@ async def start_bot() -> None:
 
     # Initialize bot and dispatcher to create instances that will handle communication with the Telegram API 
     # and manage message routing and processing, respectively
-    bot = Bot(token=conf.bot.token, parse_mode=enums.ParseMode.HTML)
+    bot = Bot(token=conf.bot.token)
     dp = Dispatcher()
 
     # Include routers for handling different types of messages to ensure that incoming messages 
