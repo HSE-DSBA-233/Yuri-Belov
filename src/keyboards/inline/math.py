@@ -42,8 +42,7 @@ class InlineKeyboards:
     def math_theory(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Что такое математика", callback_data="math_introduction"),
-                self.button(text="Что такое советская математика", callback_data="math_introduction_soviet"),
+                self.button(text="Что такое советская математика", callback_data="math_introduction"),
             ],
             [
                 self.button(text="Разделы математики", callback_data="math_books_lobby")
@@ -53,6 +52,48 @@ class InlineKeyboards:
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
+
+
+# Keyboards with differences between soviet and world wide math
+    def math_introduction(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="⬅️", callback_data="math_theory")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
+
+
+# Books
+    def math_books_lobby(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Математический анализ", callback_data="math_introduction"),
+                self.button(text="Алгебра", callback_data="math_introduction"),
+                self.button(text="Геометрия и топология", callback_data="math_introduction"),
+                self.button(text="Дифференциальные уравнения", callback_data="math_introduction"),
+                self.button(text="Теория функций", callback_data="math_introduction"),
+            ],
+            [
+                self.button(text="Функциональный анализ", callback_data="math_introduction"),
+                self.button(text="Теория вероятностей и математическая статистика", callback_data="math_introduction"),
+                self.button(text="Численные методы", callback_data="math_introduction"),
+                self.button(text="Дискретная математика", callback_data="math_introduction"),
+                self.button(text="Математическая логика и теория множеств", callback_data="math_introduction"),
+            ],
+            [
+                self.button(text="Дифференциальная геометрия", callback_data="math_introduction"),
+                self.button(text="Теория чисел", callback_data="math_introduction"),
+                self.button(text="Оптимизация и вариационное исчисление", callback_data="math_introduction"),
+                self.button(text="Теория управления и оптимизации", callback_data="math_introduction"),
+                self.button(text="Математическая физика", callback_data="math_introduction"),
+            ],
+            [
+                self.button(text="⬅️", callback_data="math_theory")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
+    
 
 
 # Keyboard with task page
