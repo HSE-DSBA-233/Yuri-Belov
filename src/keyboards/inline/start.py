@@ -21,7 +21,8 @@ class InlineKeyboards:
         buttons = [
             [
                 self.button(text="History", callback_data="history"),
-                self.button(text="start", callback_data="start")
+                self.button(text="Math", callback_data="math"),
+                self.button(text="Programming", callback_data="programming")
             ],
             [
                 self.button(text="start", callback_data="start")
