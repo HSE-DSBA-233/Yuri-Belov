@@ -20,7 +20,7 @@ class InlineKeyboards:
     def start(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Математика", callback_data="math_menu"),
+                self.button(text="Математика", callback_data="math"),
                 self.button(text="Программирование", callback_data="programming")
             ],
             [
