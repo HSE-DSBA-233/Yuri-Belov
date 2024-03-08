@@ -7,7 +7,6 @@ Classes:
     InlineKeyboards: Generates inline keyboards with predefined buttons.
 """
 
-from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
@@ -17,23 +16,18 @@ class InlineKeyboards:
         self.button = InlineKeyboardButton
 
 
-    def start(self) -> InlineKeyboardMarkup:
+    def programming_menu(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Математика", callback_data="math"),
-                self.button(text="Программирование", callback_data="programming")
+                self.button(text="История", callback_data="programming_history"),
+                self.button(text="Теория", callback_data="programming_theory"),
+                self.button(text="Задачи", callback_data="programming_tasks")
             ],
             [
-                self.button(text="О боте", callback_data="about")
-            ]
-        ]
-        return self.keyboard(inline_keyboard=buttons)
-
-    def start_about(self) -> InlineKeyboardMarkup:
-        buttons = [
+                self.button(text="Переводчик", callback_data="programming_translator")
+            ],
             [
                 self.button(text="⬅️", callback_data="start")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
-
