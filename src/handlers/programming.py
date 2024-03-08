@@ -7,10 +7,10 @@ programming_router = Router(name='programming')
 programming_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 
-@programming_router.callback_query(F.data == "programming")
-async def programming_handler(callback: types.CallbackQuery):
-    handler(__name__, type=callback)
-    await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
+@programming_router.message(F.text == "Программирование")
+async def programming_handler(message: types.Message):
+    handler(__name__, type=message)
+    await message.answer(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
 
 
 @programming_router.callback_query(F.data == "programming_theory")

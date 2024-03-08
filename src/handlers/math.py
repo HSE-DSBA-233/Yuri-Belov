@@ -7,11 +7,10 @@ from filters.chat_type import ChatTypeFilter
 math_router = Router(name='math')
 math_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
-# callback on math button from, the start
-@math_router.callback_query(F.data == "math")
-async def math_handler(callback: types.CallbackQuery):
-    handler(__name__, type=callback)
-    await callback.message.edit_text("Выберите раздел:", reply_markup=InlineKeyboards().math_menu())
+@math_router.message(F.text == "Математика")
+async def math_handler(message: types.Message):
+    handler(__name__, type=message)
+    await message.answer("Выберите раздел:", reply_markup=InlineKeyboards().math_menu())
 
 
 # callback on theory button from, math menu

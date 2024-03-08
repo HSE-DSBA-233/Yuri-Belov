@@ -23,9 +23,6 @@ class InlineKeyboards:
                 self.button(text="История", callback_data="math_history"),
                 self.button(text="Теория", callback_data="math_theory"),
                 self.button(text="Задачи", callback_data="math_tasks")
-            ],
-            [
-                self.button(text="⬅️", callback_data="start")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
