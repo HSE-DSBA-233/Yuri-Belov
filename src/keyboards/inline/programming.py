@@ -25,9 +25,6 @@ class InlineKeyboards:
             ],
             [
                 self.button(text="Переводчик", callback_data="programming_translator")
-            ],
-            [
-                self.button(text="⬅️", callback_data="start")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)

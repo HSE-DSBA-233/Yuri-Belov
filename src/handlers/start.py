@@ -11,7 +11,7 @@ Functions:
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from utils.logging import handler
-from keyboards.inline.start import InlineKeyboards
+from keyboards.default.start import DefaultKeyboards
 from filters.chat_type import ChatTypeFilter
 
 start_router = Router(name='start')
@@ -21,16 +21,11 @@ start_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 @start_router.message(Command(commands='start'))
 async def start_handler(message: types.Message):
     handler(__name__, type=message)
-    await message.answer(text="Меню:", reply_markup=InlineKeyboards().start())
+    await message.answer(text="Меню:", reply_markup=DefaultKeyboards().start_default_keyboard())
 
-# Возврат в стартовое меню по кнопке "Назад" из разделов "Math", "Programming", etc
-@start_router.callback_query(F.data == "start")
-async def start_menu_handler(callback: types.CallbackQuery):
-    handler(__name__, type=callback)
-    await callback.message.edit_text(text="Меню:", reply_markup=InlineKeyboards().start())
 
 # Раздел "О боте"
-@start_router.callback_query(F.data == "about")
-async def start_about_handler(callback: types.CallbackQuery):
-    handler(__name__, type=callback)
-    await callback.message.edit_text(text="О боте.", reply_markup=InlineKeyboards().start_about())
+@start_router.message(F.text == "О боте")
+async def start_about_handler(message: types.Message):
+    handler(__name__, type=message)
+    await message.answer(text="Бот был создан группой студентов-гиков ВШЭ ФКН ПАД в честь проекта по ОРГ!")
