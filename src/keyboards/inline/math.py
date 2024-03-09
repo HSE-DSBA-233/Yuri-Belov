@@ -68,35 +68,35 @@ class InlineKeyboards:
     def math_books_lobby(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Математический анализ", callback_data="math_introduction"),
-                self.button(text="Алгебра", callback_data="math_introduction"),
+                self.button(text="Математический анализ", callback_data="math_book_analysis"),
+                self.button(text="Алгебра", callback_data="math_book_algebra"),
             ],
             [
-                self.button(text="Геометрия и топология", callback_data="math_introduction"),
-                self.button(text="Дифференциальные уравнения", callback_data="math_introduction"),
+                self.button(text="Геометрия и топология", callback_data="math_book_geometry"),
+                self.button(text="Дифференциальные уравнения", callback_data="math_book_differential"),
             ],
             [
-                self.button(text="Теория функций", callback_data="math_introduction"),
-                self.button(text="Функциональный анализ", callback_data="math_introduction"),
+                self.button(text="Теория функций", callback_data="math_functions"),
+                self.button(text="Функциональный анализ", callback_data="math_book_functionsAnalysis"),
             ],
             [
-                self.button(text="Теория вероятностей и математическая статистика", callback_data="math_introduction"),
-                self.button(text="Численные методы", callback_data="math_introduction"),
+                self.button(text="Теория вероятностей и математическая статистика", callback_data="math_book_probability"),
+                self.button(text="Численные методы", callback_data="math_book_numberMethods"),
             ],
             [
-                self.button(text="Дискретная математика", callback_data="math_introduction"),
-                self.button(text="Математическая логика и теория множеств", callback_data="math_introduction"),
+                self.button(text="Дискретная математика", callback_data="math_book_discrete"),
+                self.button(text="Математическая логика и теория множеств", callback_data="math_book_logic"),
             ],
             [
-                self.button(text="Дифференциальная геометрия", callback_data="math_introduction"),
-                self.button(text="Теория чисел", callback_data="math_introduction"),
+                self.button(text="Дифференциальная геометрия", callback_data="math_book_diffGeometry"),
+                self.button(text="Теория чисел", callback_data="math_numberTheory"),
             ],
             [
-                self.button(text="Оптимизация и вариационное исчисление", callback_data="math_introduction"),
-                self.button(text="Теория управления и оптимизации", callback_data="math_introduction"),
+                self.button(text="Оптимизация и вариационное исчисление", callback_data="math_book_optimization"),
+                self.button(text="Теория управления и оптимизации", callback_data="math_book_managment"),
             ],
             [
-                self.button(text="Математическая физика", callback_data="math_introduction"),
+                self.button(text="Математическая физика", callback_data="math_book_physics"),
             ],
             [
                 self.button(text="⬅️", callback_data="math_theory")
