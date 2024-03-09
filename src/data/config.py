@@ -70,6 +70,8 @@ class Configuration:
     db = DatabaseConfig()
     redis = RedisConfig()
     bot = BotConfig()
+    openai_api_key = getenv("OPENAI_API_KEY")
+    mistral_api_key = getenv("MISTRAL_API_KEY")
 
 # Create an instance of the Configuration class to aggregate all configuration settings,
 # allowing easy access to database, Redis, and bot configurations throughout the application.

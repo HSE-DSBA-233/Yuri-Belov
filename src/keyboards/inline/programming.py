@@ -36,6 +36,9 @@ class InlineKeyboards:
                 self.button(text="Начать решать задачи", callback_data="programming_tasks_start")
             ],
             [
+                self.button(text="Таблица рекордов", callback_data="programming_tasks_table")
+            ],
+            [
                 self.button(text="⬅️", callback_data="programming_menu")
             ]
         ]
