@@ -107,7 +107,7 @@ class InlineKeyboards:
 
 
 # Keyboard with task page
-    def math_tasks(self) -> InlineKeyboardMarkup:
+    def math_tasks_start(self) -> InlineKeyboardMarkup:
         buttons = [
             [
                 self.button(text="Простой уровень", callback_data="math_tasks_easy"),
@@ -118,7 +118,58 @@ class InlineKeyboards:
                 self.button(text="Уровень Советского пятикласника", callback_data="math_tasks_olympiad"),
             ],
             [
+                self.button(text="⬅️", callback_data="math_tasks")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
+    
+
+    def math_tasks(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Начать решать задачи", callback_data="math_tasks_start")
+            ],
+            [
+                self.button(text="Таблица рекордов", callback_data="math_tasks_table")
+            ],
+            [
                 self.button(text="⬅️", callback_data="math")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
+
+
+    def math_tasks_easy(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Продолжить", callback_data="math_tasks_easy")
+            ],
+            [
+                self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
+
+
+    def math_tasks_medium(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Продолжить", callback_data="math_tasks_medium")
+            ],
+            [
+                self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons) 
+
+
+    def math_tasks_hard(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Продолжить", callback_data="math_tasks_hard")
+            ],
+            [
+                self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons) 
