@@ -38,7 +38,7 @@ async def math_handler_theory(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.answer_document(FSInputFile(path="src/assets/mathBooks/1968Fixtengolz1-2_compressed.pdf"), caption="Математический анализ, Фихтенгольц")
+    await callback.message.answer_document(FSInputFile(path="assets/mathBooks/1968Fixtengolz1-2_compressed.pdf"), caption="Математический анализ, Фихтенгольц")
     await msg.delete()
 
 
@@ -46,7 +46,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/Kostrikin_A_I_-_Vvedenie_v_algebru_Chast_I_Osnovy_algebry_2000_FIZMATLIT_compressed.pdf"), caption="Введение в алгебру, Костринкин")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/Kostrikin_A_I_-_Vvedenie_v_algebru_Chast_I_Osnovy_algebry_2000_FIZMATLIT_compressed.pdf"), caption="Введение в алгебру, Костринкин")
     await msg.delete()
 
 
@@ -54,7 +54,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/TopologyAndGeometry.pdf"), caption="Основы общей топологии в задачах и упражнениях Архангельский, Пономарев")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/TopologyAndGeometry.pdf"), caption="Основы общей топологии в задачах и упражнениях Архангельский, Пономарев")
     await msg.delete()
 
 
@@ -62,8 +62,8 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/differentialPt1.pdf"), caption="ЛЕКЦИИ ПО ОБЫКНОВЕННЫМ ДИФФЕРЕНЦИАЛЬНЫМ УРАВНЕНИЯМ Ч.1 Мамонтов")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/differentialPt2.pdf"), caption="ЛЕКЦИИ ПО ОБЫКНОВЕННЫМ ДИФФЕРЕНЦИАЛЬНЫМ УРАВНЕНИЯМ Ч.2 Мамонтов")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/differentialPt1.pdf"), caption="ЛЕКЦИИ ПО ОБЫКНОВЕННЫМ ДИФФЕРЕНЦИАЛЬНЫМ УРАВНЕНИЯМ Ч.1 Мамонтов")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/differentialPt2.pdf"), caption="ЛЕКЦИИ ПО ОБЫКНОВЕННЫМ ДИФФЕРЕНЦИАЛЬНЫМ УРАВНЕНИЯМ Ч.2 Мамонтов")
     await msg.delete()
 
 
@@ -71,7 +71,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/Volkovyskiy_L_I__Lunts_G_L__Aramanovich_I_G_-_Sbornik_zadach_po_teorii_funktsiy_komplexnogo_peremennogo_-_2004_compressed.pdf"), caption="Задачник Волковыский по теории функций комплексного переменного")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/Volkovyskiy_L_I__Lunts_G_L__Aramanovich_I_G_-_Sbornik_zadach_po_teorii_funktsiy_komplexnogo_peremennogo_-_2004_compressed.pdf"), caption="Задачник Волковыский по теории функций комплексного переменного")
     await msg.delete()
 
 
@@ -79,7 +79,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/FunctionalAnalysis.pdf"), caption="Функциональный анализ, Канторович")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/FunctionalAnalysis.pdf"), caption="Функциональный анализ, Канторович")
     await msg.delete()
 
 
@@ -87,7 +87,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/ProbTheory_compressed.pdf"), caption="Курс теории вероятностей, Гнеденко")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/ProbTheory_compressed.pdf"), caption="Курс теории вероятностей, Гнеденко")
     await msg.delete()
 
 
@@ -95,7 +95,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/Samarskiy_1989_432_compressed.pdf"), caption="Численные методы, Самарский")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/Samarskiy_1989_432_compressed.pdf"), caption="Численные методы, Самарский")
     await msg.delete()
 
 
@@ -103,7 +103,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/discra_compressed.pdf"), caption="Дискретная математика для программистов, Новиков")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/discra_compressed.pdf"), caption="Дискретная математика для программистов, Новиков")
     await msg.delete()
 
 
@@ -111,7 +111,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/MATLOGIC.pdf"), caption="Математическая логика, Ершов, Полютин")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/MATLOGIC.pdf"), caption="Математическая логика, Ершов, Полютин")
     await msg.delete()
 
 
@@ -119,8 +119,8 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/diffGeomp1.pdf"), caption="Лекции по диффференциальной геометрии Ч1, Тайманов")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/diffGeomp2.pdf"), caption="Лекции по диффференциальной геометрии Ч2, Тайманов")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/diffGeomp1.pdf"), caption="Лекции по диффференциальной геометрии Ч1, Тайманов")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/diffGeomp2.pdf"), caption="Лекции по диффференциальной геометрии Ч2, Тайманов")
     await msg.delete()
 
 
@@ -128,7 +128,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/osnovy_teorii_chisel.pdf"), caption="Основы теории чисел, Винградов")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/osnovy_teorii_chisel.pdf"), caption="Основы теории чисел, Винградов")
     await msg.delete()
 
 
@@ -136,7 +136,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/Elsgolc1969ru_compressed.pdf"), caption="Дифферинциальные уравнения и Вариационное исчисление, Эльсгольц")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/Elsgolc1969ru_compressed.pdf"), caption="Дифферинциальные уравнения и Вариационное исчисление, Эльсгольц")
     await msg.delete()
 
 
@@ -144,7 +144,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/Managment.pdf"), caption="Проблемы управления")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/Managment.pdf"), caption="Проблемы управления")
     await msg.delete()
 
 
@@ -152,7 +152,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/vladimirov-lectures-1981_compressed.pdf"), caption="Уравнение математический физики, Владимиров")
+    await callback.message.reply_document(FSInputFile(path="assets/mathBooks/vladimirov-lectures-1981_compressed.pdf"), caption="Уравнение математический физики, Владимиров")
     await msg.delete()
 """"""
 
