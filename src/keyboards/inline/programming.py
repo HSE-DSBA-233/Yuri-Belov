@@ -28,3 +28,27 @@ class InlineKeyboards:
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
+    
+
+    def programming_tasks_start(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Начать решать задачи", callback_data="programming_tasks_start")
+            ],
+            [
+                self.button(text="⬅️", callback_data="programming_menu")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
+
+
+    def programming_tasks_start_stop(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Продолжить", callback_data="programming_tasks_start")
+            ],
+            [
+                self.button(text="Я больше не хочу решать", callback_data="programming_tasks_stop")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
