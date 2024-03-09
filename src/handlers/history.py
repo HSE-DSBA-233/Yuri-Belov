@@ -12,7 +12,12 @@ history_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 # callback on history button from math menu
 @history_router.callback_query(F.data == "history_math")
-async def programming_tasks_handler(callback: types.CallbackQuery):
+async def history_math_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(text="История", reply_markup=InlineKeyboards().history_math())
 
+
+@history_router.callback_query(F.data == "history_programming")
+async def history_programming_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(text="История", reply_markup=InlineKeyboards().history_programming())

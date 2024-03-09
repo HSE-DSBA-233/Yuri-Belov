@@ -23,3 +23,12 @@ class InlineKeyboards:
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)    
+    
+
+    def history_programming(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="⬅️", callback_data="programming_menu")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)    

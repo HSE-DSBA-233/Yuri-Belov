@@ -13,21 +13,21 @@ math_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 # default keyboard
 @math_router.message(F.text == "Математика")
-async def math_handler(message: types.Message):
+async def math_handler_menu(message: types.Message):
     handler(__name__, type=message)
     await message.answer("Выберите раздел:", reply_markup=InlineKeyboards().math_menu())
 
 
 # callback on math
 @math_router.callback_query(F.data == "math")
-async def programming_theory_handler(callback: types.CallbackQuery):
+async def math_handler_menu(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text("Выберите раздел:", reply_markup=InlineKeyboards().math_menu())
 
 
 # callback on theory button from, math menu
 @math_router.callback_query(F.data == "math_theory")
-async def programming_theory_handler(callback: types.CallbackQuery):
+async def math_handler_theory(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(text="Теория", reply_markup=InlineKeyboards().math_theory())
 
@@ -159,14 +159,14 @@ async def send_pdf(callback: types.CallbackQuery):
 
 # callback on tasks button from, math menu
 @math_router.callback_query(F.data == "math_tasks")
-async def programming_tasks_handler(callback: types.CallbackQuery):
+async def math_handler_tasks(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(text="Задачи", reply_markup=InlineKeyboards().math_tasks())
 
 
 # callback on soviet math
 @math_router.callback_query(F.data == "math_introduction")
-async def programming_tasks_handler(callback: types.CallbackQuery):
+async def math_handler_theory_introduction(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
         text=(
@@ -187,6 +187,6 @@ async def programming_tasks_handler(callback: types.CallbackQuery):
 
 # callback on history button from math menu
 @math_router.callback_query(F.data == "math_books_lobby")
-async def programming_tasks_handler(callback: types.CallbackQuery):
+async def math_handler_books(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(text="Выберите раздел математики:", reply_markup=InlineKeyboards().math_books_lobby())

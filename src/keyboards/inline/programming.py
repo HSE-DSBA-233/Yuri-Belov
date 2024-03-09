@@ -19,7 +19,7 @@ class InlineKeyboards:
     def programming_menu(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="История", callback_data="programming_history"),
+                self.button(text="История", callback_data="history_programming"),
                 self.button(text="Теория", callback_data="programming_theory"),
                 self.button(text="Задачи", callback_data="programming_tasks")
             ],
