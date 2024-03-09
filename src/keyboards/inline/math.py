@@ -70,22 +70,32 @@ class InlineKeyboards:
             [
                 self.button(text="Математический анализ", callback_data="math_introduction"),
                 self.button(text="Алгебра", callback_data="math_introduction"),
-                self.button(text="Геометрия и топология", callback_data="math_introduction"),
-                self.button(text="Дифференциальные уравнения", callback_data="math_introduction"),
-                self.button(text="Теория функций", callback_data="math_introduction"),
             ],
             [
+                self.button(text="Геометрия и топология", callback_data="math_introduction"),
+                self.button(text="Дифференциальные уравнения", callback_data="math_introduction"),
+            ],
+            [
+                self.button(text="Теория функций", callback_data="math_introduction"),
                 self.button(text="Функциональный анализ", callback_data="math_introduction"),
+            ],
+            [
                 self.button(text="Теория вероятностей и математическая статистика", callback_data="math_introduction"),
                 self.button(text="Численные методы", callback_data="math_introduction"),
+            ],
+            [
                 self.button(text="Дискретная математика", callback_data="math_introduction"),
                 self.button(text="Математическая логика и теория множеств", callback_data="math_introduction"),
             ],
             [
                 self.button(text="Дифференциальная геометрия", callback_data="math_introduction"),
                 self.button(text="Теория чисел", callback_data="math_introduction"),
+            ],
+            [
                 self.button(text="Оптимизация и вариационное исчисление", callback_data="math_introduction"),
                 self.button(text="Теория управления и оптимизации", callback_data="math_introduction"),
+            ],
+            [
                 self.button(text="Математическая физика", callback_data="math_introduction"),
             ],
             [
