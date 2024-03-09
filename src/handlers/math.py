@@ -109,7 +109,8 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.answer("Отправка книги, пожалуйста подождите...")
-    await callback.message.reply_document(FSInputFile(path=""))
+    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/diffGeomp1.pdf"))
+    await callback.message.reply_document(FSInputFile(path="src/assets/mathBooks/diffGeomp2.pdf"))
 
 
 @math_router.callback_query(F.data == "math_numberTheory")
