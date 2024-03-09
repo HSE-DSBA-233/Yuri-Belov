@@ -18,6 +18,13 @@ async def programming_handler(message: types.Message):
     await message.answer(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
 
 
+# callback to return to the programming menu
+@programming_router.callback_query(F.data == "programming_menu")
+async def programming_theory_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
+
+
 @programming_router.callback_query(F.data == "programming_theory")
 async def programming_theory_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
@@ -33,13 +40,22 @@ def programming_tasks_get() -> dict:
 def programming_tasks_check(task: dict, answer: str) -> str:
     correct_answer = task["answer"]
     if answer.strip().lower() == correct_answer.lower():
-        return "Верно"
+        return True
     else:
-        return "Неверно, осталось попытки: "
+        return False
 
 
 @programming_router.callback_query(F.data == "programming_tasks")
 async def programming_tasks_handler(callback: types.CallbackQuery, state: FSMContext):
+    handler(__name__, type=callback)
+    await callback.message.edit_text("<b>Задачи.</b>\n\n"
+                                     "Здесь тебя ждут разные задачи по советской информатике и программированию.", 
+                                     reply_markup=InlineKeyboards().programming_tasks_start(), 
+                                     parse_mode="HTML")
+
+
+@programming_router.callback_query(F.data == "programming_tasks_start")
+async def programming_tasks_start_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
     task: dict = programming_tasks_get() 
     await callback.message.answer(task["question"])
@@ -52,7 +68,17 @@ async def programming_tasks_check_handler(message: types.Message, state: FSMCont
     handler(__name__, type=message)
     answer = message.text
     task: dict = await state.get_data()
-    await message.answer(programming_tasks_check(task, answer))
+    result: bool = programming_tasks_check(task, answer)
+    if result:
+        await message.answer("Верно!", reply_markup=InlineKeyboards().programming_tasks_start_stop())
+    else:
+        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().programming_tasks_start_stop())
+
+# callback to return to the programming menu after tasks
+@programming_router.callback_query(ProgrammingState.answer, F.data == "programming_tasks_stop")
+async def programming_theory_handler(callback: types.CallbackQuery, state: FSMContext):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
     await state.clear()
 
 
