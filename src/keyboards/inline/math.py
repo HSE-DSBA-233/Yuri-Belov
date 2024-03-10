@@ -112,7 +112,7 @@ class InlineKeyboards:
             [
                 self.button(text="Простой уровень", callback_data="math_tasks_easy"),
                 self.button(text="Средний уровень", callback_data="math_tasks_medium"),
-                self.button(text="Продвинутый уровень", callback_data="math_tasks_advanced")
+                self.button(text="Продвинутый уровень", callback_data="math_tasks_hard")
             ],
             [
                 self.button(text="Уровень Советского пятикласника", callback_data="math_tasks_olympiad"),

@@ -8,12 +8,12 @@ class Database:
 
     def add_user(self, user_id, username):
         with self.connection:
-            return self.cursor.execute('INSERT INTO "math_users" ("user_id", "username") VALUES (?, ?)', (user_id, username))
+            return self.cursor.execute('INSERT INTO "math_users" ("user_id", "username") VALUES (?, ?)', (user_id, username,))
 
 
     def user_exists(self, user_id):
         with self.connection:
-            result = self.cursor.execute('SELECT * FROM "math_users" WHERE "user_id" = ?', (user_id)).fetchall()
+            result = self.cursor.execute('SELECT * FROM "math_users" WHERE "user_id" = ?', (user_id,)).fetchall()
             return bool(len(result))
 
 
@@ -25,7 +25,7 @@ class Database:
 
     def add_score(self, user_id, score):
         with self.connection:
-            return self.cursor.execute('UPDATE math_users SET "score" = "score" + ? WHERE user_id = ?', (score, user_id))
+            return self.cursor.execute('UPDATE math_users SET "score" = "score" + ? WHERE user_id = ?', (score, user_id,))
 
 
-db = Database('db_math.db')
+db = Database('db.db')
