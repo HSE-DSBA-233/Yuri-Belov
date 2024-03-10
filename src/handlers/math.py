@@ -11,7 +11,7 @@ from aiogram.fsm.context import FSMContext
 import json
 import random
 from data.config import conf
-from utils.db import db
+from utils.db_math import db
 
 
 math_router = Router(name='math')
@@ -261,7 +261,7 @@ async def math_tasks_easy_start_handler(callback: types.CallbackQuery, state: FS
         db.add_user(user_id, username)
     task: dict = math_easy_tasks_get() 
     await callback.message.answer(task["question"])
-    await state.set_state(MathState.answer)
+    await state.set_state(MathState.answer_math_easy)
     await state.update_data(task)
 
 
@@ -275,7 +275,7 @@ async def math_tasks_medium_start_handler(callback: types.CallbackQuery, state: 
         db.add_user(user_id, username)
     task: dict = math_medium_tasks_get() 
     await callback.message.answer(task["question"])
-    await state.set_state(MathState.answer)
+    await state.set_state(MathState.answer_math_medium)
     await state.update_data(task)    
 
 
@@ -289,12 +289,12 @@ async def math_tasks_hard_start_handler(callback: types.CallbackQuery, state: FS
         db.add_user(user_id, username)
     task: dict = math_hard_tasks_get() 
     await callback.message.answer(task["question"])
-    await state.set_state(MathState.answer)
+    await state.set_state(MathState.answer_math_hard)
     await state.update_data(task)
 
 
 #Easy
-@math_router.message(MathState.answer)
+@math_router.message(MathState.answer_math_easy)
 async def math_tasks_easy_check_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
     answer = message.text
@@ -308,7 +308,7 @@ async def math_tasks_easy_check_handler(message: types.Message, state: FSMContex
 
 
 #Medium
-@math_router.message(MathState.answer)
+@math_router.message(MathState.answer_math_medium)
 async def math_tasks_easy_check_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
     answer = message.text
@@ -322,7 +322,7 @@ async def math_tasks_easy_check_handler(message: types.Message, state: FSMContex
 
 
 #Hard
-@math_router.message(MathState.answer)
+@math_router.message(MathState.answer_math_hard)
 async def math_tasks_easy_check_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
     answer = message.text
@@ -335,7 +335,7 @@ async def math_tasks_easy_check_handler(message: types.Message, state: FSMContex
         await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().math_tasks_hard())
 
 
-@math_router.callback_query(MathState.answer, F.data == "math_tasks_stop")
+@math_router.callback_query(F.data == "math_tasks_stop")
 async def math_tasks_stop_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
     await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().math_tasks_start())
