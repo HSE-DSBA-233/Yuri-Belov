@@ -29,10 +29,14 @@ async def programming_menu_handler(callback: types.CallbackQuery):
     await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
 
 # load tasks from JSON and pick random
-def programming_tasks_get(level: str) -> dict:
+def programming_tasks_get(user_id: int, level: str) -> dict:
     with open("assets/tasks_programming.json", "r") as file:
         tasks = json.load(file)
-    return random.choice(tasks[level])
+    unsolved_tasks = [i for i in tasks[level] if not db.task_exists(user_id, i["id"])]
+    if unsolved_tasks:
+        return random.choice(unsolved_tasks)
+    else:
+        return {"error": "All tasks are solved, stay tuned for more!"}
 
 # check the answer for a task
 def programming_tasks_check(task: dict, answer: str) -> bool:
@@ -54,12 +58,16 @@ async def programming_tasks_start_handler(callback: types.CallbackQuery, state: 
     handler(__name__, type=callback)
     user_id = callback.from_user.id
     username = callback.from_user.username
-    db.add_user(user_id, username)
+    if not db.user_exists(user_id):
+        db.add_user(user_id, username)
     level = callback.data[-1] 
-    task: dict = programming_tasks_get(level) 
-    await callback.message.answer(task["question"])
-    await state.set_state(ProgrammingState.answer)
-    await state.update_data(task)
+    task: dict = programming_tasks_get(user_id, level) 
+    if "error" in task:
+        await callback.message.answer(task["error"])
+    else:
+        await callback.message.answer(task["question"])
+        await state.set_state(ProgrammingState.answer)
+        await state.update_data(task)
 
 
 @programming_router.message(ProgrammingState.answer)
@@ -70,14 +78,16 @@ async def programming_tasks_check_handler(message: types.Message, state: FSMCont
     result: bool = programming_tasks_check(task, answer)
     if result:
         await message.answer("Верно!", reply_markup=InlineKeyboards().programming_tasks_start_stop())
-        db.add_score(message.from_user.id, 1)
+        user_id = message.from_user.id
+        db.add_task(user_id, task["id"])
+        db.add_score(user_id, 1)
     else:
         await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().programming_tasks_start_stop())
 
 
 @programming_router.callback_query(F.data == "programming_tasks_table")
 async def programming_tasks_table_handler(callback: types.CallbackQuery):
-    users = db.get_users()
+    users = db.get_all_users()
     table = "🏆 <b>Таблица рекордов:</b>\n\n"
     for user in users:
         table += f"👤 {user[1]} - {user[2]}\n"

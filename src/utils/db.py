@@ -9,36 +9,49 @@ class Database:
 
     def add_user(self, user_id, username):
         with self.connection:
-            result = self.cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,)).fetchall()
-            if not result:
-                self.cursor.execute('INSERT INTO users (user_id, username) VALUES (?, ?)', (user_id, username,))
+            return self.cursor.execute('INSERT INTO users (user_id, username) VALUES (?, ?)', (user_id, username,))
+
+
+    def user_exists(self, user_id):
+        with self.connection:
+            return self.cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,)).fetchone()
 
 
     def get_all_users(self):
         with self.connection:
-            result = self.cursor.execute('SELECT * FROM users ORDER BY score DESC').fetchall()
-            return result
+            return self.cursor.execute('SELECT * FROM users ORDER BY score DESC').fetchall()
 
 
     def add_score(self, user_id, score):
         with self.connection:
             return self.cursor.execute('UPDATE users SET score = score + ? WHERE user_id = ?', (score, user_id,))
+        
 
-
-    def add_tasks(self, user_id, task_id):
+    def add_task(self, user_id, task_id):
         with self.connection:
-            self.cursor.execute('SELECT tasks FROM users WHERE user_id = ?', (user_id,))
-            existing_tasks = self.cursor.fetchone()
-            
-            if existing_tasks is None:
+            solved_tasks = self.cursor.execute('SELECT solved_tasks FROM users WHERE user_id = ?', (user_id,)).fetchone()
+            if not solved_tasks[0]:
                 tasks_list = [task_id]
             else:
-                existing_task_ids = json.loads(existing_tasks[0])
-                existing_task_ids.append(task_id)
-                tasks_list = existing_task_ids
+                existing_tasks = json.loads(solved_tasks[0])
+                existing_tasks.append(task_id)
+                tasks_list = existing_tasks
 
-            # Update the tasks for the user
-            self.cursor.execute('UPDATE users SET tasks = ? WHERE user_id = ?', (json.dumps(tasks_list), user_id,))
+            self.cursor.execute('UPDATE users SET solved_tasks = ? WHERE user_id = ?', (json.dumps(tasks_list), user_id,))
+
+
+    def task_exists(self, user_id, task_id):
+        with self.connection:
+            row = self.cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,)).fetchone()
+            if row:
+                solved_tasks_json = row[3]
+                if solved_tasks_json:
+                    solved_tasks = json.loads(solved_tasks_json)
+                else:
+                    solved_tasks = {}
+                return task_id in solved_tasks
+            else:
+                return False
 
 
 db = Database('db.db')
