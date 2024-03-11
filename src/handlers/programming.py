@@ -29,27 +29,50 @@ async def programming_menu_handler(callback: types.CallbackQuery):
     await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().programming_menu())
 
 # load tasks from JSON and pick random
-def programming_tasks_get() -> dict:
+def programming_tasks_get(level: str) -> dict:
     with open("assets/tasks_programming.json", "r") as file:
         tasks = json.load(file)
-    return random.choice(tasks)
+    return random.choice(tasks[level])
 
 # check the answer for a task
-def programming_tasks_check(task: dict, answer: str) -> str:
+def programming_tasks_check(task: dict, answer: str) -> bool:
     correct_answer = task["answer"]
-    if answer.strip().lower() == correct_answer.lower():
-        return True
-    else:
-        return False
+    return answer.strip().lower() == correct_answer.lower()
 
 # programmning menu tasks
 @programming_router.callback_query(F.data == "programming_tasks")
-async def programming_tasks_handler(callback: types.CallbackQuery, state: FSMContext):
+async def programming_tasks_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text("<b>Задачи.</b>\n\n"
                                      "Здесь тебя ждут разные задачи по советской информатике и программированию.", 
                                      reply_markup=InlineKeyboards().programming_tasks_start(), 
                                      parse_mode="HTML")
+
+
+@programming_router.callback_query(F.data.in_({"programming_tasks_A", "programming_tasks_B", "programming_tasks_C"}))
+async def programming_tasks_start_handler(callback: types.CallbackQuery, state: FSMContext):
+    handler(__name__, type=callback)
+    user_id = callback.from_user.id
+    username = callback.from_user.username
+    db.add_user(user_id, username)
+    level = callback.data[-1] 
+    task: dict = programming_tasks_get(level) 
+    await callback.message.answer(task["question"])
+    await state.set_state(ProgrammingState.answer)
+    await state.update_data(task)
+
+
+@programming_router.message(ProgrammingState.answer)
+async def programming_tasks_check_handler(message: types.Message, state: FSMContext):
+    handler(__name__, type=message)
+    answer: str = message.text
+    task: dict = await state.get_data()
+    result: bool = programming_tasks_check(task, answer)
+    if result:
+        await message.answer("Верно!", reply_markup=InlineKeyboards().programming_tasks_start_stop())
+        db.add_score(message.from_user.id, 1)
+    else:
+        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().programming_tasks_start_stop())
 
 
 @programming_router.callback_query(F.data == "programming_tasks_table")
@@ -59,32 +82,6 @@ async def programming_tasks_table_handler(callback: types.CallbackQuery):
     for user in users:
         table += f"👤 {user[1]} - {user[2]}\n"
     await callback.message.answer(table, parse_mode="HTML")
-
-
-@programming_router.callback_query(F.data == "programming_tasks_start")
-async def programming_tasks_start_handler(callback: types.CallbackQuery, state: FSMContext):
-    handler(__name__, type=callback)
-    user_id = callback.from_user.id
-    username = callback.from_user.username
-    if not db.user_exists(user_id):
-        db.add_user(user_id, username)
-    task: dict = programming_tasks_get() 
-    await callback.message.answer(task["question"])
-    await state.set_state(ProgrammingState.answer)
-    await state.update_data(task)
-
-
-@programming_router.message(ProgrammingState.answer)
-async def programming_tasks_check_handler(message: types.Message, state: FSMContext):
-    handler(__name__, type=message)
-    answer = message.text
-    task: dict = await state.get_data()
-    result: bool = programming_tasks_check(task, answer)
-    if result:
-        await message.answer("Верно!", reply_markup=InlineKeyboards().programming_tasks_start_stop())
-        db.add_score(message.from_user.id, 1)
-    else:
-        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().programming_tasks_start_stop())
 
 # callback to return to the programming menu after tasks
 @programming_router.callback_query(ProgrammingState.answer, F.data == "programming_tasks_stop")

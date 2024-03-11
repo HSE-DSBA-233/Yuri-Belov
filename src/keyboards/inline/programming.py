@@ -33,7 +33,10 @@ class InlineKeyboards:
     def programming_tasks_start(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Начать решать задачи", callback_data="programming_tasks_start")
+                self.button(text="A", callback_data="programming_tasks_A"),
+                self.button(text="B", callback_data="programming_tasks_B"),
+                self.button(text="C", callback_data="programming_tasks_C")
+
             ],
             [
                 self.button(text="Таблица рекордов", callback_data="programming_tasks_table")
@@ -48,7 +51,7 @@ class InlineKeyboards:
     def programming_tasks_start_stop(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Продолжить", callback_data="programming_tasks_start")
+                self.button(text="Продолжить", callback_data="programming_tasks_continue")
             ],
             [
                 self.button(text="Я больше не хочу решать", callback_data="programming_tasks_stop")
