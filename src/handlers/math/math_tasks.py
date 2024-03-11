@@ -22,6 +22,14 @@ math_tasks_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 LOGIC SECTION FOR TASKS
 """
 
+@math_tasks_router.callback_query(F.data == "math_tasks_table")
+async def math_tasks_table_handler(callback: types.CallbackQuery):
+    users = db.get_users()
+    table = "🏆 <b>Таблица рекордов:</b>\n\n"
+    for user in users:
+        table += f"👤 {user[1]} - {user[2]}\n"
+    await callback.message.answer(table, parse_mode="HTML")
+
 
 # callback on tasks button from, math menu
 @math_tasks_router.callback_query(F.data == "math_tasks")
@@ -37,123 +45,52 @@ async def math_handler_tasks(callback: types.CallbackQuery, state: FSMContext):
 
 
 # load tasks from JSON and pick random
-def math_easy_tasks_get() -> dict:
-    with open("assets/tasks_math_easy.json", "r") as file:
+def programming_tasks_get(user_id: int, level: str) -> dict:
+    with open("assets/tasks_math.json", "r") as file:
         tasks = json.load(file)
-    return random.choice(tasks)
-
-
-def math_medium_tasks_get() -> dict:
-    with open("assets/tasks_math_medium.json", "r") as file:
-        tasks = json.load(file)
-    return random.choice(tasks)
-
-
-def math_hard_tasks_get() -> dict:
-    with open("assets/tasks_math_hard.json", "r") as file:
-        tasks = json.load(file)
-    return random.choice(tasks)
-
+    unsolved_tasks = [i for i in tasks[level] if not db.task_exists(user_id, i["id"])]
+    if unsolved_tasks:
+        return random.choice(unsolved_tasks)
+    else:
+        return {"error": "All tasks are solved, stay tuned for more!"}
 # check the answer for a task
+    
+
 def math_tasks_check(task: dict, answer: str) -> str:
     correct_answer = task["answer"]
-    if answer.strip().lower() == correct_answer.lower():
-        return True
-    else:
-        return False
+    return answer.strip().lower() == correct_answer.lower()
 
 
-@math_tasks_router.callback_query(F.data == "math_tasks_table")
-async def math_tasks_table_handler(callback: types.CallbackQuery):
-    users = db.get_users()
-    table = "🏆 <b>Таблица рекордов:</b>\n\n"
-    for user in users:
-        table += f"👤 {user[1]} - {user[2]}\n"
-    await callback.message.answer(table, parse_mode="HTML")
-
-
-#Easy
-@math_tasks_router.callback_query(F.data == "math_tasks_easy")
-async def math_tasks_easy_start_handler(callback: types.CallbackQuery, state: FSMContext):
+@math_tasks_router.callback_query(F.data.in_({"math_tasks_A", "math_tasks_B", "math_tasks_C"}))
+async def math_tasks_start_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
     user_id = callback.from_user.id
     username = callback.from_user.username
     if not db.user_exists(user_id):
         db.add_user(user_id, username)
-    task: dict = math_easy_tasks_get() 
-    await callback.message.answer(task["question"])
-    await state.set_state(MathState.answer_math_easy)
-    await state.update_data(task)
+    level = callback.data[-1] 
+    task: dict = programming_tasks_get(user_id, level) 
+    if "error" in task:
+        await callback.message.answer(task["error"])
+    else:
+        await callback.message.answer(task["question"])
+        await state.set_state(MathState.answer)
+        await state.update_data(task)
 
 
-#Medium
-@math_tasks_router.callback_query(F.data == "math_tasks_medium")
-async def math_tasks_medium_start_handler(callback: types.CallbackQuery, state: FSMContext):
-    handler(__name__, type=callback)
-    user_id = callback.from_user.id
-    username = callback.from_user.username
-    if not db.user_exists(user_id):
-        db.add_user(user_id, username)
-    task: dict = math_medium_tasks_get() 
-    await callback.message.answer(task["question"])
-    await state.set_state(MathState.answer_math_medium)
-    await state.update_data(task)    
-
-
-#Hard
-@math_tasks_router.callback_query(F.data == "math_tasks_hard")
-async def math_tasks_hard_start_handler(callback: types.CallbackQuery, state: FSMContext):
-    handler(__name__, type=callback)
-    user_id = callback.from_user.id
-    username = callback.from_user.username
-    if not db.user_exists(user_id):
-        db.add_user(user_id, username)
-    task: dict = math_hard_tasks_get() 
-    await callback.message.answer(task["question"])
-    await state.set_state(MathState.answer_math_hard)
-    await state.update_data(task)
-
-
-#Easy
-@math_tasks_router.message(MathState.answer_math_easy)
-async def math_tasks_easy_check_handler(message: types.Message, state: FSMContext):
+@math_tasks_router.message(MathState.answer)
+async def programming_tasks_check_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
-    answer = message.text
+    answer: str = message.text
     task: dict = await state.get_data()
     result: bool = math_tasks_check(task, answer)
     if result:
-        await message.answer("Верно!", reply_markup=InlineKeyboards().math_tasks_easy())
-        db.add_score(message.from_user.id, 1)
+        await message.answer("Верно!", reply_markup=InlineKeyboards().math_tasks_start_stop())
+        user_id = message.from_user.id
+        db.add_task(user_id, task["id"])
+        db.add_score(user_id, task["points"])
     else:
-        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().math_tasks_easy())
-
-
-#Medium
-@math_tasks_router.message(MathState.answer_math_medium)
-async def math_tasks_easy_check_handler(message: types.Message, state: FSMContext):
-    handler(__name__, type=message)
-    answer = message.text
-    task: dict = await state.get_data()
-    result: bool = math_tasks_check(task, answer)
-    if result:
-        await message.answer("Верно!", reply_markup=InlineKeyboards().math_tasks_medium())
-        db.add_score(message.from_user.id, 5)
-    else:
-        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().math_tasks_medium())
-
-
-#Hard
-@math_tasks_router.message(MathState.answer_math_hard)
-async def math_tasks_easy_check_handler(message: types.Message, state: FSMContext):
-    handler(__name__, type=message)
-    answer = message.text
-    task: dict = await state.get_data()
-    result: bool = math_tasks_check(task, answer)
-    if result:
-        await message.answer("Верно!", reply_markup=InlineKeyboards().math_tasks_hard())
-        db.add_score(message.from_user.id, 10)
-    else:
-        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().math_tasks_hard())
+        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().math_tasks_start_stop())
 
 
 @math_tasks_router.callback_query(F.data == "math_tasks_stop")

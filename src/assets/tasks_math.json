@@ -1,0 +1,26 @@
+{
+    "A": [
+      {
+        "id": "A1",
+        "points": 1,
+        "question": "What is the output of print(2 + 2)?",
+        "answer": "4"
+      }
+    ],
+    "B": [
+      {
+        "id": "B1",
+        "points": 5,
+        "question": "What does ln(Hello) return?",
+        "answer": "5"
+      }
+    ],
+    "C": [
+      {
+        "id": "C1",
+        "points": 10,
+        "question": "What is the result of '3 * 5'?",
+        "answer": "15"
+      }
+    ]
+  }

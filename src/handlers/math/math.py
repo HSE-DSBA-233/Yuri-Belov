@@ -18,7 +18,7 @@ math_router = Router(name='math')
 math_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 
-# default keyboard
+# default keyboard on math
 @math_router.message(F.text == "Математика")
 async def math_handler_menu(message: types.Message):
     handler(__name__, type=message)
