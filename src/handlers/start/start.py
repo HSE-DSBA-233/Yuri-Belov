@@ -21,11 +21,13 @@ start_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 @start_router.message(Command(commands='start'))
 async def start_handler(message: types.Message):
     handler(__name__, type=message)
-    await message.answer(text="Меню:", reply_markup=DefaultKeyboards().start_default_keyboard())
+    await message.answer(text="<b>Welcome to the Sovetsky Bot!</b>\n\nChoose from the menu below:", 
+                         reply_markup=DefaultKeyboards().start_default_keyboard(),
+                         parse_mode="HTML")
 
 
 # Раздел "О боте"
-@start_router.message(F.text == "О боте")
+@start_router.message(F.text == "About")
 async def start_about_handler(message: types.Message):
     handler(__name__, type=message)
-    await message.answer(text="Бот был создан группой студентов-гиков ВШЭ ФКН ПАД в честь проекта по ОРГ!")
+    await message.answer(text="Bot was created by HSE DSBA 233 students-geeks in honor of the ORG project!")

@@ -3,11 +3,11 @@ from utils.logging import handler
 from keyboards.inline.theory import InlineKeyboards
 from filters.chat_type import ChatTypeFilter
 
-theory_router = Router(name='theory')
-theory_router.message.filter(ChatTypeFilter(chat_type=["private"]))
+programming_theory_router = Router(name='theory')
+programming_theory_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 # Theory menu
-@theory_router.callback_query(F.data == "programming_theory")
+@programming_theory_router.callback_query(F.data == "programming_theory")
 async def programming_theory_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -19,7 +19,7 @@ async def programming_theory_handler(callback: types.CallbackQuery):
         parse_mode="MarkdownV2")
 
 
-@theory_router.callback_query(F.data == "theory_refal")
+@programming_theory_router.callback_query(F.data == "theory_refal")
 async def refal_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -30,7 +30,7 @@ async def refal_handler(callback: types.CallbackQuery):
         reply_markup=InlineKeyboards().theory_refal(), 
         parse_mode="MarkdownV2")
     
-@theory_router.callback_query(F.data == "refal_intro")
+@programming_theory_router.callback_query(F.data == "refal_intro")
 async def refal_intro_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -52,7 +52,7 @@ async def refal_intro_handler(callback: types.CallbackQuery):
     parse_mode="MarkdownV2"
 )
 
-@theory_router.callback_query(F.data == "refal_operators")
+@programming_theory_router.callback_query(F.data == "refal_operators")
 async def refal_operators_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -65,7 +65,7 @@ async def refal_operators_handler(callback: types.CallbackQuery):
 )
     
 
-@theory_router.callback_query(F.data == "refal_lists")
+@programming_theory_router.callback_query(F.data == "refal_lists")
 async def refal_lists_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -98,7 +98,7 @@ async def refal_lists_handler(callback: types.CallbackQuery):
 )
     
 
-@theory_router.callback_query(F.data == "refal_patterns")
+@programming_theory_router.callback_query(F.data == "refal_patterns")
 async def refal_patterns_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -113,7 +113,7 @@ async def refal_patterns_handler(callback: types.CallbackQuery):
     reply_markup=InlineKeyboards().back_to_theory_refal()
 )
     
-@theory_router.callback_query(F.data == "refal_recursion")
+@programming_theory_router.callback_query(F.data == "refal_recursion")
 async def refal_recursion_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
