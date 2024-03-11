@@ -13,12 +13,15 @@ class InlineKeyboards:
                 self.button(text="REFAL-5", callback_data="theory_refal"),
             ],
             [
+                self.button(text="El-76", callback_data="theory_el76"),
+            ],
+            [
                 self.button(text="⬅️", callback_data="programming_menu")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
     
-
+    # refal-5 theory begins here
     def theory_refal(self) -> InlineKeyboardMarkup:
         buttons = [
             [
@@ -51,3 +54,28 @@ class InlineKeyboards:
         ]
         return self.keyboard(inline_keyboard=buttons)
     
+    # el-76 theory begins here
+    def back_to_theory_el76(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="⬅️", callback_data="theory_el76")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
+    
+    def theory_el76(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="History", callback_data="el76_history"),
+            ],
+            [
+                self.button(text="Syntax overview", callback_data="el76_syntax"),
+            ],
+            [
+                self.button(text="Basic operations", callback_data="el76_operators"),
+            ],
+            [
+                self.button(text="⬅️", callback_data="programming_theory")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
