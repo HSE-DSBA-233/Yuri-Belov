@@ -46,7 +46,7 @@ async def math_handler_tasks(callback: types.CallbackQuery, state: FSMContext):
 
 # load tasks from JSON and pick random
 def programming_tasks_get(user_id: int, level: str) -> dict:
-    with open("assets/tasks_math.json", "r") as file:
+    with open("assets/json/tasks_math.json", "r") as file:
         tasks = json.load(file)
     unsolved_tasks = [i for i in tasks[level] if not db.task_exists(user_id, i["id"])]
     if unsolved_tasks:
