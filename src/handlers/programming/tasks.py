@@ -3,13 +3,14 @@ from utils.logging import handler
 from keyboards.inline.programming import InlineKeyboards
 from filters.chat_type import ChatTypeFilter
 from aiogram.fsm.context import FSMContext
-from states.programming_state import ProgrammingState
+from states.programming_state import ProgrammingTasksState
 import json
 import random
 from utils.db import db
 
 programming_tasks_router = Router(name='programming_tasks')
 programming_tasks_router.message.filter(ChatTypeFilter(chat_type=["private"]))
+
 
 # load tasks from JSON and pick random
 def programming_tasks_get(user_id: int, level: str) -> dict:
@@ -21,10 +22,12 @@ def programming_tasks_get(user_id: int, level: str) -> dict:
     else:
         return {"error": f"All tasks are solved, stay tuned for more!"}
 
+
 # check the answer xfor a task
 def programming_tasks_check(task: dict, answer: str) -> bool:
     correct_answer = task["answer"]
     return answer.strip().lower() == correct_answer.lower()
+
 
 # programmning menu tasks
 @programming_tasks_router.callback_query(F.data == "programming_tasks")
@@ -51,11 +54,11 @@ async def programming_tasks_start_handler(callback: types.CallbackQuery, state: 
         task_id = task["id"]
         task_question = task["question"]
         await callback.message.edit_text(f"<b>{task_id}.</b> {task_question}", parse_mode="HTML")
-        await state.set_state(ProgrammingState.answer)
+        await state.set_state(ProgrammingTasksState.answer)
         await state.update_data(task)
 
 
-@programming_tasks_router.message(ProgrammingState.answer)
+@programming_tasks_router.message(ProgrammingTasksState.answer)
 async def programming_tasks_check_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
     answer: str = message.text
@@ -85,8 +88,9 @@ async def programming_tasks_table_handler(callback: types.CallbackQuery):
         table += f"👤 @{user[1]} - {user[2]}\n"
     await callback.message.edit_text(table, reply_markup=InlineKeyboards().programming_tasks_back(), parse_mode="HTML")
 
+
 # callback to return to the programming menu after tasks
-@programming_tasks_router.callback_query(ProgrammingState.answer, F.data == "programming_tasks_stop")
+@programming_tasks_router.callback_query(ProgrammingTasksState.answer, F.data == "programming_tasks_stop")
 async def programming_tasks_stop_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
     await callback.message.edit_text(text="Choose a section:", reply_markup=InlineKeyboards().programming_menu())
