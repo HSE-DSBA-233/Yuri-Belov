@@ -48,7 +48,9 @@ async def programming_tasks_start_handler(callback: types.CallbackQuery, state: 
     if "error" in task:
         await callback.message.edit_text(task["error"], reply_markup=InlineKeyboards().programming_tasks_back())
     else:
-        await callback.message.edit_text(f"<b>{task["id"]}.</b> {task["question"]}", parse_mode="HTML")
+        task_id = task["id"]
+        task_question = task["question"]
+        await callback.message.edit_text(f"<b>{task_id}.</b> {task_question}", parse_mode="HTML")
         await state.set_state(ProgrammingState.answer)
         await state.update_data(task)
 
