@@ -38,19 +38,19 @@ async def math_handler_tasks(callback: types.CallbackQuery, state: FSMContext):
 
 # load tasks from JSON and pick random
 def math_easy_tasks_get() -> dict:
-    with open("assets/json/tasks_math_easy.json", "r") as file:
+    with open("assets/tasks_math_easy.json", "r") as file:
         tasks = json.load(file)
     return random.choice(tasks)
 
 
 def math_medium_tasks_get() -> dict:
-    with open("assets/json/tasks_math_medium.json", "r") as file:
+    with open("assets/tasks_math_medium.json", "r") as file:
         tasks = json.load(file)
     return random.choice(tasks)
 
 
 def math_hard_tasks_get() -> dict:
-    with open("assets/json/tasks_math_hard.json", "r") as file:
+    with open("assets/tasks_math_hard.json", "r") as file:
         tasks = json.load(file)
     return random.choice(tasks)
 
