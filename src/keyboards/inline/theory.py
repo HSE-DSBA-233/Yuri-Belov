@@ -75,6 +75,9 @@ class InlineKeyboards:
                 self.button(text="Basic operations", callback_data="el76_operators"),
             ],
             [
+                self.button(text="Code examples", callback_data="el76_examples"),
+            ],
+            [
                 self.button(text="⬅️", callback_data="programming_theory")
             ]
         ]
