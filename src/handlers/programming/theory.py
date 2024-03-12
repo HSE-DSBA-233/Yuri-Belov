@@ -71,8 +71,8 @@ async def refal_lists_handler(callback: types.CallbackQuery):
     await callback.message.edit_text(
     text=(
         "*Lists*\n\n"
-        "Creating a list in REFAL\\-5 involves using parentheses \\(\\) to denote the list and using a dot \\. to separate the elements\. Lists in REFAL are similar to linked lists, where each element points to the next\. Here's how you can create lists of various lengths and complexities:\n\n"
-        "*Empty List:* An empty list is just \\(\\)\.\n\n"
+        "Creating a list in REFAL\\-5 involves using parentheses `\\(\\)`to denote the list and using a dot \\. to separate the elements\. Lists in REFAL are similar to linked lists, where each element points to the next\. Here's how you can create lists of various lengths and complexities:\n\n"
+        "*Empty List:* An empty list is just `\\(\\)`\.\n\n"
         "*Single Element List:* A list with one element, say `a`, is written as:\n"
         "```REFAL-5\n"
         "\\(a \\. \\(\\)\\)\n"
@@ -158,4 +158,109 @@ async def refal_recursion_handler(callback: types.CallbackQuery):
     ),
     parse_mode="MarkdownV2",
     reply_markup=InlineKeyboards().back_to_theory_refal()  # Assuming you want to include the back button
+)
+
+# el-76 theory begins here
+@theory_router.callback_query(F.data == "theory_el76")
+async def el76_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+        text=(
+        "*El\\-76*\n\n"
+        "El\\-76 is a high\\-level programming language developed in `1972\\-1973`\\. The language was created for the Elbrus computer and entirely consists of `Cyrillic` letters\\."
+        ),
+        reply_markup=InlineKeyboards().theory_el76(), 
+        parse_mode="MarkdownV2")
+
+
+@theory_router.callback_query(F.data == "el76_history")
+async def el76_history_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=( 
+            "*History of `El\\-76`*\n\n"
+            "`El\\-76` is a programming language developed at the _Lebedev Institute of Precision Mechanics and Computer Engineering_ in the `USSR`\\. It was designed by *Boris Babayan* and his team in the early `1970s` for use on the *Elbrus\\-1* computer, one of the earliest Soviet mainframe computers\\. The language's development was part of a larger initiative to create a software ecosystem for *Elbrus* computers, which were among the most powerful computing systems in the `USSR` at the time\\.\n\n"
+            "The choice to use _Cyrillic_ characters in `El\\-76's` syntax was driven by the desire to make the language more accessible to programmers in the Soviet Union, where _Cyrillic_ is the standard script\\. This decision reflects a broader trend in Soviet computing to develop technology that catered specifically to the needs and contexts of its users\\.\n\n"
+            "Over the years, `El\\-76` was used for various applications, including system programming, scientific computing, and educational purposes\\. Despite its innovative aspects, the language remained relatively unknown outside the Soviet Union and its direct sphere of influence\\.\n\n"
+            "Today, `El\\-76` stands as a testament to the rich history of computing in the `USSR` and offers valuable insights into the unique challenges and solutions encountered in the development of computer technology during that era\\."
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_el76(),
+)
+
+
+@theory_router.callback_query(F.data == "el76_syntax")
+async def el76_syntax_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Syntax Overview of `El\\-76`*\n\n"
+        "`El\\-76`, like any programming language, has its unique syntax that defines how programs are written and structured\\. Here are some peculiarities and key aspects of El\\-76 syntax:\n\n\n"
+        "*1\\. Cyrillic Keywords:*\n"
+        "`El\\-76` utilizes Cyrillic keywords for its syntax, which is aligned with its development in a Russian\\-speaking context\\. This approach makes the language more intuitive for Cyrillic\\-based language speakers\\. However, latin letters are still allowed for denoting variables\\.\n\n"
+        "_Example:_ начало, конец, если, цикл, перемен, процедура\n\n"
+        "*2\\. Variable Declaration and Initialization:*\n"
+        "`El\\-76` uses specific keywords for declaring variables with a type or changing their values\\.\n\n"
+        "_Example 1:_ `перемен ai#чис;`\n"
+        "_Example 2:_ `ai := a[I]`\n\n"
+        "*3\\. Loops and Conditions:*\n"
+        "`El\\-76` supports loop constructs and conditional statements, allowing for complex data processing\\.\n\n"
+        "_Example 1:_\n`для і от 1 до длина а \\- 1 цикл ...`\n"
+        "_Example 2:_ `если a[j] \\<= ai то ...`\n\n"
+        "*4\\. Functions and Procedures:*\n"
+        "`El\\-76` allows the definition of functions and procedures for modular and reusable code\\.\n\n"
+        "_Example:_\n`процедура сортпр = проц (конст а#тм)`\n\n"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_el76()
+)
+
+
+
+
+@theory_router.callback_query(F.data == "el76_operators")
+async def el76_operators_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Basic Operators in `El\\-76`*\n\n"
+        "`El\\-76` includes several basic operators similar to those found in other programming languages\\.\n\n"
+        "*Assignment* `\\(:=\\)`*:*\n"
+        "```El-76\n"
+        "ai := a[i]\n\n"
+        "```\n\n"
+        "*Arithmetic Operators:*\n"
+        "*Addition* `\\(+\\)`*:*\n"
+        "```El-76\n"
+        "r := r + 1;\n"
+        "```\n"
+        "*Subtraction* `\\(\\-\\)`*:*"
+        "```El-76\n"
+        "r := r - 1;\n"
+        "```\n"
+        "*Multiplication* `\\(*\\)`*:*\n"
+        "```El-76\n"
+        "r := r * 10;\n"
+        "```\n\n"
+        "*Division* `\\(/\\)`*:*"
+        "```El-76\n"
+        "m[i] := измтип (r/:2, циф);\n"
+        "```\n\n"
+        "*Comparison Operators:*\n"
+        "*Less than or equal to* `\\(<=\\)`*:*"
+        "```El-76\n"
+        "если a[j] <= ai то найден ! (j)\n\n"
+        "```\n\n"
+        "*Concatenation* `\\(+\\)`*:*"
+        "```El-76\n"
+        "s[l] := измтип (\"0\" + m[l], лит);\n\n"
+        "```\n\n"
+        "*Comment* `\\(%\\)`*:*"
+        "```El-76\n"
+        "цикл % слева от i-го элемента ищется меньший\n"
+        "```\n\n"
+        "These examples illustrate how various operators are utilized in `El\\-76` to perform assignments, arithmetic operations, comparisons, concatenations, and comments\\."
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_el76()
 )
