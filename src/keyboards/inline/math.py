@@ -110,12 +110,9 @@ class InlineKeyboards:
     def math_tasks_start(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Простой уровень", callback_data="math_tasks_A"),
-                self.button(text="Средний уровень", callback_data="math_tasks_B"),
-                self.button(text="Продвинутый уровень", callback_data="math_tasks_C")
-            ],
-            [
-                self.button(text="Уровень Советского пятикласника", callback_data="math_tasks_olympiad"),
+                self.button(text="High school level", callback_data="math_tasks_A"),
+                self.button(text="University level", callback_data="math_tasks_B"),
+                self.button(text="School olympiad level", callback_data="math_tasks_C")
             ],
             [
                 self.button(text="⬅️", callback_data="math_tasks")
@@ -142,10 +139,9 @@ class InlineKeyboards:
     def math_tasks_start_stop(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Простой уровень", callback_data="math_tasks_A"),
-                self.button(text="Средний уровень", callback_data="math_tasks_B"),
-                self.button(text="Продвинутый уровень", callback_data="math_tasks_C")
-
+                self.button(text="High school level", callback_data="math_tasks_A"),
+                self.button(text="University level", callback_data="math_tasks_B"),
+                self.button(text="School olympiad level", callback_data="math_tasks_C")
             ],
             [
                 self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
