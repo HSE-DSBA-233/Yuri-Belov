@@ -379,4 +379,505 @@ async def el76_examples_handler(callback: types.CallbackQuery):
         reply_markup=InlineKeyboards().back_to_theory_el76()
     )
 
-    
+
+@programming_theory_router.callback_query(F.data == "theory_rapira")
+async def rapira_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+        text=(
+            "*RAPIRA*\n\n"
+            "`Rapira` is a programming language designed with an educational intent, created to serve as a bridge from the educational language `Robic` to more standard programming languages\\. It was initially developed by _G\\.A\\. Zvenigorodsky_ and implemented as an interpreter within the *\"Shkolnitsa\" \\(\"Schoolgirl\"\\)* programming system on the *\"Agat\"* computer\\. The language's design is rooted in facilitating learning and ease of use, making it a suitable choice for beginners in programming\\.\n\n"
+            "One of the notable aspects of `Rapira` is its _multiple regional versions_\\. This characteristic indicates that the language was adapted to meet the specific needs or preferences of different user bases, potentially including variations in keywords, syntax, or functionality to better align with regional educational standards or programming practices\\. These regional versions allow for a more localized and accessible learning experience, catering to the unique context of each user group\\.\n\n"
+            "_In this particular theory resourse English version of Rapira is presented\\. However, here's a small code snippet of original Rapira:_\n"
+            "```Rapira\n"
+            "ПРОЦ СТАРТ();\n"
+            "\tВЫВОД: “ЗДРАВСТВУЙ, МИР!”;\n"
+            "КНЦ;```"
+        ),
+        parse_mode="MarkdownV2",
+        reply_markup=InlineKeyboards().theory_rapira()
+    )
+
+
+@programming_theory_router.callback_query(F.data == "rapira_objects")
+async def rapira_objects_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+        text=(
+            "*Objects and Operations, supported by Rapira*\n\n"
+            "*Objects:* _logical_ \\(`yes, no`\\), _integer_ and _real_ numbers, _texts_, _sequences_, the _empty object_ \\(empty\\)\\.\n"
+            "_Procedures_, _functions_, _modules_, and _devices_ are also *objects*\\. "
+            "For all objects, operations `\\=` and `/\\=` are defined\\.\n\n"
+            "*Logical:* yes, no\n"
+            "*Logical operations:* and, or, not\n\n"
+            "*Numbers:* `125` \\(integer\\), `530\\.84` \\(real\\), `1\\.9e\\-8` \\(real\\)\n"
+            "*Numeric operations:* `\\+` and `\\-` \\(unary and binary\\), `\\*`, `/`, `\\*\\*` \\(exponentiation\\), "
+            "`//` and `/%` \\(integer division and remainder \\- for integer numbers\\), `\\>`, `\\<`, `\\>\\=`, `<\\=`\n\n"
+            "_Example 1:_\n"
+             "```Rapira\n"
+            "fun PRIME(N)\n"
+            "\tif N<2 then\n"
+            "\t\treturn no\n"
+            "\tfi\n"
+            "\tfor M from 2 to sqrt(N)+0.5 do\n"
+            "\t\tif N /% M = 0 then\n"
+            "\t\t\treturn no\n"
+            "\t\tfi\n"
+            "\tod\n"
+            "\treturn yes\n"
+            "end\n"
+            "output: PRIME(2003)\n"
+            "```\n\n"
+            "_Example 2:_\n"
+            "```Rapira\n"
+            "proc FRAME (N)\n"
+            "\toutput: \"@\" * N\n"
+            "\trepeat (N - 2) do\n"
+            "\t\toutput: \"@\" + \" \" * (N - 2) + \"@\"\n"
+            "\tod\n"
+            "\toutput: \"@\" * N\n"
+            "end\n\n"
+            "call FRAME(5)\n"
+            "```"
+        ),
+        parse_mode="MarkdownV2",
+        reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
+@programming_theory_router.callback_query(F.data == "rapira_sequences")
+async def rapira_sequences_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Sequences*\n\n"
+        "```\n"
+        "<2,3,5,7,11>\n"
+        "<“a”,“e”,“1”,“o”>\n"
+        "<<1, 3, <6, 7, 9>>, 10, <44, 70, 99>>\n"
+        "```\n\n"
+        "*Sequence* is an _ordered set_ of objects\\. *Any* `Rapira` object may be an element of a sequence \\(including the other sequence\\)\\. The sequence construct operation `< \\>` builds a sequence\\.\n\n"
+        "*Sequential operations:* `\\#` \\(length\\), `\\+` \\(concentration\\), `\\*` \\(multiplication by non\\-negative integer\\), `[]` \\(element select in the sequence\\), `[:]` \\(subsequence slice\\)\n\n"
+        "_Example 1_:\n"
+        "```Rapira\n"
+        "fun TEXT_TO_WORDS (PHRASE)\n"
+        "\tPHRASE:= PHRASE + \" \"\n"
+        "\tWORDS:= <* *>\n"
+        "\twhile PHRASE /= \"\" do\n"
+        "\t\tK := index(\" \", PHRASE)\n"
+        "\t\tif K /= 1 then\n"
+        "\t\t\tWORDS:= WORDS + <* PHRASE[:K-1] *>\n"
+        "\t\tfi\n"
+        "\t\tPHRASE:= PHRASE[K+1:]\n"
+        "\tod\n"
+        "\treturn WORDS\n"
+        "end\n\n"
+        "WORDS_SEQUENCE:= TEXT_TO_WORDS(\"...many people nowadays Like marmelade Instead.\")\n"
+        "output: WORDS_SEQUENCE\n"
+        "```\n\n"
+        "_Example 2_:\n"
+        "```Rapira\n"
+        "proc SORT ( <=NUMBERS )\n\n"
+        "\tNEW:= <* *>\n"
+        "\twhile NUMBERS /= <* *> do\n"
+        "\t\tMIN:= NUMBERS[1]; IND:= 1\n"
+        "\t\tfor K from 2 to #NUMBERS do\n"
+        "\t\t\tif NUMBERS[K]<MIN then\n"
+        "\t\t\t\tMIN:= NUMBERS[K]; IND:= K\n"
+        "\t\t\tfi\n"
+        "\t\tod\n"
+        "\t\tNEW:= NEW + <* MIN *>\n"
+        "\t\tNUMBERS[IND:IND]:= <* *>\n"
+        "\tod\n"
+        "\tNUMBERS:= NEW\n"
+        "end\n"
+        "DAYS:= <* *>\n"
+        "repeat 10 do\n"
+        "\tDAYS:= DAYS + <* int_rand(31) *>\n"
+        "od\n"
+        "output: DAYS\n"
+        "SORT(<=DAYS)\n"
+        "output: DAYS\n"
+        "```"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
+
+@programming_theory_router.callback_query(F.data == "rapira_variables")
+async def rapira_variables_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Variables*\n\n"
+        "_Any object may act as the value of a variable\._\n\n"
+        "*Example:*\n"
+        "_Game:_ a person thinks of an animal; the computer tries to guess it by asking questions, for `‘yes’` and `‘no’` answer only\. If the animal is unknown, the computer asks for help thus enriching its `knowledge`\.\n\n"
+        "The computer asks if this animal is thought of it\. If not, the computer gives up, asks for that animal, and a question to distinguish them both\. As a result, the leaf is replaced by the new subtree\.\n\n"
+        "*Implementation:*\n"
+        "The tree is represented by the sequence KNOWLEDGE:\n"
+        "`<question, subtree for ‘yes’, subtree for ‘no’\\>`\n"
+        "Each subtree is a similar _sequence_ or a text \(animal’s name\)\. When a subtree is chosen, the attempt variable value is a sequence or a text, depending upon the descend depth\.\n\n"
+        "```Rapira\n"
+        "proc ANIMALS ( <=KNOWLEDGE )\n\n"
+        "\toutput: KNOWLEDGE[1], \"(yes,no)\"\n"
+        "\tinput: ANSWER\n"
+        "\tif ANSWER then\n"
+        "\t\tN := 2\n"
+        "\telse\n"
+        "\t\tN := 3\n"
+        "\tfi\n"
+        "\tATTEMPT:= KNOWLEDGE[N]\n"
+        "\tif is_seq(ATTEMPT) then\n"
+        "\t\tANIMALS(<=ATTEMPT)\n"
+        "\telse\n"
+        "\t\toutput: \"Is it a \", ATTEMPT, \"?(yes,no)\"\n"
+        "\t\tinput: ANSWER\n"
+        "\t\tif ANSWER then\n"
+        "\t\t\toutput: \"I've guessed!\"\n"
+        "\t\telse\n\n"
+        "\t\t\toutput: \"I give up\. What animal are you thinking of?\"\n"
+        "\t\t\tinput text: BEAST\n"
+        "\t\t\toutput: \"Type in a question to distinguish\"\n"
+        "\t\t\toutput: \"a \", BEAST, \" and a \", ATTEMPT, \":\"\n"
+        "\t\t\tinput text: QUESTION\n"
+        "\t\t\toutput: \"What will be an answer for a \", BEAST, \"?\"\n"
+        "\t\t\tinput: ANSWER\n"
+        "\t\t\tif ANSWER then\n"
+        "\t\t\t\tATTEMPT := <* QUESTION, BEAST, ATTEMPT *>\n"
+        "\t\t\telse\n"
+        "\t\t\t\tATTEMPT := <* QUESTION, ATTEMPT, BEAST *>\n"
+        "\t\t\tfi\n"
+        "\t\tfi\n"
+        "\tfi\n"
+        "\tKNOWLEDGE[N]:= ATTEMPT\n"
+        "end\n\n"
+        "ALL_ANIMALS:= <* \"Does it live in water?\", \"fish\", \"ostrich\" *>\n"
+        "do\n"
+        "\tANIMALS(<=ALL_ANIMALS)\n"
+        "od\n"
+        "```\n\n"
+        "*How it works:*\n"
+        "```Game\n"
+        "- Does it live in water?(yes, no)\n"
+        "  no\n"
+        "- Is it an ostrich?(yes, no)\n"
+        "  no\n"
+        "- I give up\. What animal are you thinking of?\n"
+        "  turtle\n"
+        "- Type in a question to distinguish a turtle and an ostrich:\n"
+        "  Has it wings?\n"
+        "- What will be an answer for a turtle?\n"
+        "  no\n"
+        "- Does it live in water?(yes, no)\n"
+        "  no\n"
+        "- Has it wings?(yes, no)\n"
+        "  yes\n"
+        "- Is it an ostrich?(yes, no)\n"
+        "  no\n"
+        "- I give up\. What animal are you thinking of?\n"
+        "  parrot\n"
+        "- Type in a question to distinguish a parrot and an ostrich:\n"
+        "  Can it fly?\n"
+        "- What will be an answer for a parrot?\n"
+        "  yes\n"
+        "- Does it live in water?(yes, no)\n"
+        "  yes\n"
+        "- Is it a fish?(yes, no)\n"
+        "  yes\n"
+        "- I’ve guessed!```"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
+
+@programming_theory_router.callback_query(F.data == "rapira_slices")
+async def rapira_slices_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Slices and selections*\n\n"
+        "_Writing a variable you may use slices and selections:_\n"
+        "```Rapira\n"
+        "KNOWLEDGE[N] := ATTEMPT\n"
+        "```\n\n"
+        "_Example:_"
+        "```Rapira\n"
+        "proc REPLACE ( <=WHERE, =>WHAT, =>BY_WHAT )\n"
+        "\tN:= 1\n"
+        "\tdo\n"
+        "\t\tK:= index (WHAT, WHERE [N:])\n"
+        "\n"
+        "\t\tif K = 0 then\n"
+        "\t\t\texit\n"
+        "\t\tfi\n"
+        "\t\tK:= N+K-1\n"
+        "\t\tWHERE[K:K+#WHAT-1]:= BY_WHAT\n"
+        "\n"
+        "\t\tN:= K + #BY_WHAT\n"
+        "\tod\n"
+        "end\n\n"
+        "FAIRYTAIL:= \"Somebody said,\" + lf + \"\"\"Bother!\"\"\" + lf + \"And then he said,\" + lf + \"\"\"Oh, deary me!\"\"\" + lf + \"Somebody sobbed, \"\"Oh, deary me!\"\"\" + lf + \"And went back to bed.\"\n"
+        "REPLACE (<=FAIRYTAIL, =>\"Somebody\", =>\"The King\")\n"
+        "output: FAIRYTAIL\n"
+        "```\n\n"
+        "_So, the output would be:\n_"
+        "`The King said,\n"
+        "\"Bother\"!\n"
+        "And then he said,\n"
+        "\"Oh, deary me!\"\n"
+        "The King sobbed, \"Oh, deary me!\"\n"
+        "And went back to the bad\\.`"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
+
+@programming_theory_router.callback_query(F.data == "rapira_statements")
+async def rapira_statements_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Statements*\n\n"
+        "Statements: _assignment, procedure call, conditional, cases, loops, output, input, loop exit, return from procedure or function\\._\n"
+        "Almost all statements were used in the examples before this section\\.\n\n"
+        "`It is time for the largest example yet`\n\n"
+        "_Example:_\n\n"
+        "```Rapira\n"
+        "proc GAME ()\n"
+        "\textern: GAME_START, YOUR_TURN, MY_TURN, WRONG\n"
+        "\tintern: RIDDLE, MIN, MAX, YOU_GUESSED, I_GUESSED\n"
+        "\toutput: \"Who'll guess first?\"\n"
+        "\tGAME_START()\n"
+        "\tdo\n"
+        "\t\toutput: \"Your turn:\"; YOUR_TURN()\n"
+        "\t\toutput: \"My turn.\"; MY_TURN()\n"
+        "\t\tcase\n"
+        "\t\t\twhen YOU_GUESSED and I_GUESSED:\n"
+        "\t\t\t\toutput: \"Nobody won!\"\n"
+        "\t\t\twhen YOU_GUESSED:\n"
+        "\t\t\t\toutput: \"You won!\"\n"
+        "\t\t\twhen I_GUESSED:\n"
+        "\t\t\t\toutput: \"I won!\"\n"
+        "\t\tesac\n"
+        "\t\tif YOU_GUESSED or I_GUESSED then\n"
+        "\t\t\treturn\n"
+        "\t\tfi\n"
+        "\tuntil WRONG()\n\n"
+        "\toutput: \"You've missed somewhere!\"\n"
+        "\toutput: \"I don't want to play anymore.\"\n"
+        "end\n\n"
+        "proc GAME_START ()\n"
+        "\textern: RIDDLE, MIN, MAX, YOU_GUESSED, I_GUESSED\n"
+        "\toutput: \"Think of a number from 1 to 1000\"\n"
+        "\toutput: \"and try to guess mine\"\n"
+        "\tRIDDLE      := int_rand(1000)\n"
+        "\tMIN         := 0\n"
+        "\tMAX         := 1001\n"
+        "\tYOU_GUESSED := no\n"
+        "\tI_GUESSED   := no\n"
+        "end\n\n"
+        "proc YOUR_TURN ()\n"
+        "\textern: RIDDLE, YOU_GUESSED\n"
+        "\tintern: ATTEMPT\n"
+        "\tinput: ATTEMPT\n"
+        "\tcase\n"
+        "\t\twhen ATTEMPT>RIDDLE:\n"
+        "\t\t\toutput: \"My number is less!\"\n"
+        "\t\twhen ATTEMPT<RIDDLE:\n"
+        "\t\t\toutput: \"My number is greater!\"\n"
+        "\tesac\n"
+        "\tYOU_GUESSED:= (ATTEMPT = RIDDLE)\n"
+        "end\n\n"
+        "proc MY_TURN ()\n"
+        "\textern: MIN, MAX, I_GUESSED\n"
+        "\tintern: ATTEMPT, ANSWER, ANSWER_CORRECT\n"
+        "\tATTEMPT:= (MIN+MAX) // 2\n"
+        "\toutput: \"Is it \", ATTEMPT, \"?\"\n"
+        "\tdo\n"
+        "\t\toutput: \"Answers: =, > (riddle>\", ATTEMPT, \"), < (riddle<\", ATTEMPT, \")\"\n"
+        "\t\tinput text: ANSWER\n"
+        "\t\tANSWER_CORRECT:= yes\n"
+        "\t\tcase ANSWER\n"
+        "\t\t\twhen \">\":   MIN         := ATTEMPT\n"
+        "\t\t\twhen \"<\":   MAX         := ATTEMPT\n"
+        "\t\t\twhen \"=\":   I_GUESSED   := yes\n"
+        "\t\t\telse        ANSWER_CORRECT:= no\n"
+        "\t\t\t\t\t\t\toutput:\"You did a mistake\"\n"
+        "\t\tesac\n"
+        "\tuntil ANSWER_CORRECT\n"
+        "end\n\n"
+        "fun WRONG ()\n"
+        "\textern: MAX, MIN\n"
+        "\treturn MIN+1=MAX\n"
+        "end\n\n"
+        "GAME()\n"
+        "```\n"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira_statements()
+)
+
+
+@programming_theory_router.callback_query(F.data == "rapira_statements_game")
+async def rapira_statements_game_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "_This is an example of how the game would be commenced:_\n\n"
+        "```Game\n"
+        "- Who'll guess first?\n"
+        "- Think of a number from 1 to 1000 and try to guess mine\n"
+        "- Your turn:\n"
+        "  512\n"
+        "- My number is less!\n"
+        "- My turn.\n"
+        "- Is it 500?\n"
+        "- Answers: =, > (riddle> 500), < (riddle< 500)\n"
+        "  <\n"
+        "- Your turn:\n"
+        "  256\n"
+        "- My number is greater!\n"
+        "- My turn.\n"
+        "- Is it 250?\n"
+        "- Answers: =, > (riddle> 250), < (riddle< 250)\n"
+        "  <\n"
+        "- Your turn:\n"
+        "  384\n"
+        "- My turn.\n"
+        "- Is it 125?\n"
+        "- Answers: =, > (riddle> 125), < (riddle< 125)\n"
+        "  >\n"
+        "- You won!```"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira_statements_game()
+)
+
+@programming_theory_router.callback_query(F.data == "rapira_modules")
+async def rapira_modules_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Modules and Devices*\n\n"
+        "Means of modules and devices planned:\n"
+        "\\- connecting a module enlarges the list of standard names _\\(including standard procedures and functions names\\)_\\.\n\n"
+        "\\- connecting a module *enlarges the set* of simple statements\\.\n\n"
+        "\\- a device is a special form of module\\. A device may be communicated with by means of input and output:\n"
+        "\t\toutput \\>\\>printer:\n"
+        "\t\t\t\t“This text \\- to printer”\n\n"
+        "Input/output statements may contain mode specifications:\n"
+        "\t\tinput text: QUESTION\t\t\t\\\ see example 9\n"
+        "\"text\" is a keyword for the KEYBOARD device\\."
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
+
+@programming_theory_router.callback_query(F.data == "rapira_equivalents")
+async def rapira_equivalents_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Russian equivalents of functions*\n\n"
+        "_In this section, a table of simple functions in both English and Russian is presented:_\n\n"
+        "```Rapira\n"
+        "keyword::=    \\\ in the Russian variant\n"
+        "and           \\\ и\n"
+        "call          \\\ вызов\n"
+        "case          \\\ выбор\n"
+        "do            \\\ цикл\n"
+        "else          \\\ иначе\n"
+        "end           \\\ конец\n"
+        "esac          \\\ все\n"
+        "exit          \\\ выход\n"
+        "extern        \\\ чужие\n"
+        "fi            \\\ все\n"
+        "for           \\\ для\n"
+        "from          \\\ от\n"
+        "fun           \\\ функ\n"
+        "if            \\\ если\n"
+        "input         \\\ ввод\n"
+        "intern        \\\ свои\n"
+        "nlf           \\\ бпс\n"
+        "not           \\\ не\n"
+        "od            \\\ кц\n"
+        "or            \\\ или\n"
+        "output        \\\ вывод\n"
+        "proc          \\\ проц\n"
+        "repeat        \\\ повтор\n"
+        "return        \\\ возврат\n"
+        "step          \\\ шаг\n"
+        "text          \\\ текста\n"
+        "then          \\\ то\n"
+        "to            \\\ до\n"
+        "until         \\\ кц по\n"
+        "when          \\\ при\n"
+        "while         \\\ пока\n"
+        "```"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
+@programming_theory_router.callback_query(F.data == "rapira_others")
+async def rapira_others_handler(callback: types.CallbackQuery):
+    handler(__name__, type=callback)
+    await callback.message.edit_text(
+    text=(
+        "*Other examples*\n\n"
+        "_In this section, you can examine code which didn’t make it to the previous sections\\._\n\n"
+        "```Rapira\n"
+        "proc VICE_VERSA ()\n"
+        "\toutput: \"Enter a text \"\n"
+        "\tinput text: PHRASE\n"
+        "\tREVERSED:= \"\"\n"
+        "\tfor K to #PHRASE do\n"
+        "\t\tREVERSED:= PHRASE[K] + REVERSED\n"
+        "\tod\n"
+        "\toutput: REVERSED\n"
+        "end\n"
+        "call VICE_VERSA()\n"
+        "```\n\n"
+        "```Rapira\n"
+        "proc TEXT_BY_WORDS (PHRASE)\n"
+        "\tPHRASE:= PHRASE + \" \"\n"
+        "\twhile PHRASE /= \"\" do\n"
+        "\t\tK:= index(\" \", PHRASE)\n"
+        "\t\tif K /= 1 then\n"
+        "\t\t\toutput: PHRASE[:K-1]\n"
+        "\t\tfi\n"
+        "\t\tPHRASE:= PHRASE[K+1:]\n"
+        "\tod\n"
+        "end\n"
+        "TEXT_BY_WORDS(\"...I'll go and tell The cow Now Before she goes to bed.\")\n"
+        "```\n\n"
+        "```Rapira\n"
+        "fun SIEVE (N)\n"
+        "\tPRIME:= <* yes *> * N\n"
+        "\tfor K from 2 to sqrt(N)+0.5 do\n"
+        "\t\tif PRIME[K] then\n"
+        "\t\t\tfor J from K+K to N step K do\n"
+        "\t\t\t\tPRIME[J]:= no\n"
+        "\t\t\tod\n"
+        "\t\tfi\n"
+        "\tod\n"
+        "\tPRIME_NUMBERS:= <* *>\n"
+        "\tfor K from 2 to N do\n"
+        "\t\tif PRIME[K] then\n"
+        "\t\t\tPRIME_NUMBERS:= PRIME_NUMBERS + <* K *>\n"
+        "\t\tfi\n"
+        "\tod\n"
+        "\treturn PRIME_NUMBERS\n"
+        "end\n"
+        "output: SIEVE(5)\n"
+        "output: SIEVE(200)\n"
+        "```"
+    ),
+    parse_mode="MarkdownV2",
+    reply_markup=InlineKeyboards().back_to_theory_rapira()
+)
+
