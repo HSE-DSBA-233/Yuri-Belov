@@ -24,7 +24,7 @@ LOGIC SECTION FOR TASKS
 
 @math_tasks_router.callback_query(F.data == "math_tasks_table")
 async def math_tasks_table_handler(callback: types.CallbackQuery):
-    users = db.get_users()
+    users = db.get_all_users()
     table = "🏆 <b>Таблица рекордов:</b>\n\n"
     for user in users:
         table += f"👤 {user[1]} - {user[2]}\n"
@@ -73,9 +73,33 @@ async def math_tasks_start_handler(callback: types.CallbackQuery, state: FSMCont
     if "error" in task:
         await callback.message.answer(task["error"])
     else:
-        await callback.message.answer(task["question"])
+        task_id = task["id"]
+        task_question = task["question"]
+        await callback.message.edit_text(f"<b>{task_id}.</b> {task_question}", parse_mode="HTML")
         await state.set_state(MathState.answer)
         await state.update_data(task)
+
+
+@math_tasks_router.message(MathState.answer)
+async def programming_tasks_check_handler(message: types.Message, state: FSMContext):
+    handler(__name__, type=message)
+    answer: str = message.text
+    task: dict = await state.get_data()
+    result: bool = math_tasks_check(task, answer)
+    if result:
+        user_id = message.from_user.id
+        task_id = task["id"][0]
+        if task_id == "A":
+            score = 1
+        elif task_id == "B":
+            score = 3
+        elif task_id == "C":
+            score = 3
+        await message.answer(f"<b>✅ Right!</b>\n\n+{score}!", reply_markup=InlineKeyboards().math_tasks_start_stop(), parse_mode="HTML")
+        db.add_task(user_id, task["id"])
+        db.add_score(user_id, score)
+    else:
+        await message.answer("❌ Wrong, try again.", reply_markup=InlineKeyboards().math_tasks_start_stop())
 
 
 @math_tasks_router.message(MathState.answer)
