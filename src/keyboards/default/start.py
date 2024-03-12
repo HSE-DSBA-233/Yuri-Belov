@@ -9,7 +9,7 @@ class DefaultKeyboards:
     def start_default_keyboard(self) -> ReplyKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Математика"),
+                self.button(text="Math"),
                 self.button(text="Programming")
             ],
             [

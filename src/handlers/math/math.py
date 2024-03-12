@@ -19,15 +19,15 @@ math_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 
 # default keyboard on math
-@math_router.message(F.text == "Математика")
+@math_router.message(F.text == "Math")
 async def math_handler_menu(message: types.Message):
     handler(__name__, type=message)
-    await message.answer("Выберите раздел:", reply_markup=InlineKeyboards().math_menu())
+    await message.answer("Choose section:", reply_markup=InlineKeyboards().math_menu())
 
 
 # callback on math
 @math_router.callback_query(F.data == "math")
 async def math_handler_menu(callback: types.CallbackQuery):
     handler(__name__, type=callback)
-    await callback.message.edit_text("Выберите раздел:", reply_markup=InlineKeyboards().math_menu())
+    await callback.message.edit_text("Choose section:", reply_markup=InlineKeyboards().math_menu())
 

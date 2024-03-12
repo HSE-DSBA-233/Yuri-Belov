@@ -25,7 +25,7 @@ LOGIC SECTION FOR TASKS
 @math_tasks_router.callback_query(F.data == "math_tasks_table")
 async def math_tasks_table_handler(callback: types.CallbackQuery):
     users = db.get_all_users()
-    table = "🏆 <b>Таблица рекордов:</b>\n\n"
+    table = "🏆 <b>Leader board:</b>\n\n"
     for user in users:
         table += f"👤 {user[1]} - {user[2]}\n"
     await callback.message.answer(table, parse_mode="HTML")
@@ -35,17 +35,17 @@ async def math_tasks_table_handler(callback: types.CallbackQuery):
 @math_tasks_router.callback_query(F.data == "math_tasks")
 async def math_handler_tasks(callback: types.CallbackQuery):
     handler(__name__, type=callback)
-    await callback.message.edit_text(text="Задачи", reply_markup=InlineKeyboards().math_tasks())
+    await callback.message.edit_text(text="Tasks", reply_markup=InlineKeyboards().math_tasks())
 
 
 @math_tasks_router.callback_query(F.data == "math_tasks_start")
 async def math_handler_tasks(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text(text="Выберите уровень сложности:", reply_markup=InlineKeyboards().math_tasks_start())
+    await callback.message.edit_text(text="Choose difficulty:", reply_markup=InlineKeyboards().math_tasks_start())
 
 
 # load tasks from JSON and pick random
-def programming_tasks_get(user_id: int, level: str) -> dict:
+def math_tasks_get(user_id: int, level: str) -> dict:
     with open("assets/json/tasks_math.json", "r") as file:
         tasks = json.load(file)
     unsolved_tasks = [i for i in tasks[level] if not db.task_exists(user_id, i["id"])]
@@ -69,13 +69,17 @@ async def math_tasks_start_handler(callback: types.CallbackQuery, state: FSMCont
     if not db.user_exists(user_id):
         db.add_user(user_id, username)
     level = callback.data[-1] 
-    task: dict = programming_tasks_get(user_id, level) 
+    task: dict = math_tasks_get(user_id, level) 
     if "error" in task:
         await callback.message.answer(task["error"])
     else:
+        global msg_photo
+        global msg_text 
         task_id = task["id"]
         task_question = task["question"]
-        await callback.message.edit_text(f"<b>{task_id}.</b> {task_question}", parse_mode="HTML")
+        task_photo = task["image"]
+        msg_photo = await callback.message.answer_photo(FSInputFile(path=task_photo))
+        msg_text = await callback.message.edit_text(f"<b>{task_id}.</b> {task_question}", parse_mode="HTML")
         await state.set_state(MathState.answer)
         await state.update_data(task)
 
@@ -95,6 +99,8 @@ async def programming_tasks_check_handler(message: types.Message, state: FSMCont
             score = 3
         elif task_id == "C":
             score = 3
+        await msg_text.delete()
+        await msg_photo.delete()
         await message.answer(f"<b>✅ Right!</b>\n\n+{score}!", reply_markup=InlineKeyboards().math_tasks_start_stop(), parse_mode="HTML")
         db.add_task(user_id, task["id"])
         db.add_score(user_id, score)
@@ -109,17 +115,17 @@ async def programming_tasks_check_handler(message: types.Message, state: FSMCont
     task: dict = await state.get_data()
     result: bool = math_tasks_check(task, answer)
     if result:
-        await message.answer("Верно!", reply_markup=InlineKeyboards().math_tasks_start_stop())
+        await message.answer("Correct!", reply_markup=InlineKeyboards().math_tasks_start_stop())
         user_id = message.from_user.id
         db.add_task(user_id, task["id"])
         db.add_score(user_id, task["points"])
     else:
-        await message.answer("Неверно, попробуй ещё раз.", reply_markup=InlineKeyboards().math_tasks_start_stop())
+        await message.answer("Wrong, try again.", reply_markup=InlineKeyboards().math_tasks_start_stop())
 
 
 @math_tasks_router.callback_query(F.data == "math_tasks_stop")
 async def math_tasks_stop_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text(text="Выбери раздел:", reply_markup=InlineKeyboards().math_tasks_start())
+    await callback.message.edit_text(text="Choose section:", reply_markup=InlineKeyboards().math_tasks_start())
     await state.clear()
     

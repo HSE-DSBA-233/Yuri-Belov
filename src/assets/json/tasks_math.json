@@ -2,28 +2,63 @@
   "A": [
     {
       "id": "A1",
-      "question": "What is the output of print(2 + 2)?",
-      "answer": "4"
+      "question": "Solve this equation",
+      "image": "assets/mathImages/A1.png",
+      "answer": "1"
     },
     {
       "id": "A2",
-      "question": "What is the output of print(2 + 2)?",
-      "answer": "4"
+      "question": "Solve this equation",
+      "image": "assets/mathImages/A2.png",
+      "answer": "sh(arcsh(4)/6)"
     },
     {
       "id": "A3",
-      "question": "What is the output of print(2 + 2)?",
-      "answer": "4"
+      "question": "Solve this equation",
+      "image": "assets/mathImages/A3.png",
+      "answer": "0"
     },
     {
       "id": "A4",
-      "question": "What is the output of print(2 + 2)?",
-      "answer": "4"
+      "question": "Solve this equation",
+      "image": "assets/mathImages/A4.png",
+      "answer": "-1"
     },
     {
       "id": "A5",
-      "question": "What is the output of print(2 + 2)?",
-      "answer": "4"
+      "question": "Solve this equation.",
+      "image": "assets/mathImages/A5.png",
+      "answer": "0"
+    },
+    {
+      "id": "A6",
+      "question": "Solve this equation \n(π = pi, for arbitrary integer number use symbol k, for multiplication sign use *)",
+      "image": "assets/mathImages/A6.png",
+      "answer": "pi*k"
+    },
+    {
+      "id": "A7",
+      "question": "Solve this limit",
+      "image": "assets/mathImages/A7.png",
+      "answer": "3"
+    },
+    {
+      "id": "A8",
+      "question": "Solve this equation \n(for square root use sqrt())",
+      "image": "assets/mathImages/A8.png",
+      "answer": "1+sqrt(2)"
+    },
+    {
+      "id": "A9",
+      "question": "Solve this equation \n(for π use pi, for arbitrary integer number use symbol k, for multiplication sign use *)",
+      "image": "assets/mathImages/A9.png",
+      "answer": "pi/2+pi*k"
+    },
+    {
+      "id": "A10",
+      "question": "Solve this limit",
+      "image": "assets/mathImages/A10.png",
+      "answer": "1/e"
     }
   ],
   "B": [

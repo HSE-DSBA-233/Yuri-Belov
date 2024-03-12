@@ -20,19 +20,9 @@ class InlineKeyboards:
     def math_menu(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="История", callback_data="history_math"),
-                self.button(text="Теория", callback_data="math_theory"),
-                self.button(text="Задачи", callback_data="math_tasks")
-            ]
-        ]
-        return self.keyboard(inline_keyboard=buttons)
-    
-
-# Keyboard with history menu
-    def math_history(self) -> InlineKeyboardMarkup:
-        buttons = [
-            [
-                self.button(text="⬅️", callback_data="math")
+                self.button(text="History", callback_data="history_math"),
+                self.button(text="Theory", callback_data="math_theory"),
+                self.button(text="Tasks", callback_data="math_tasks")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
@@ -42,10 +32,10 @@ class InlineKeyboards:
     def math_theory(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Что такое советская математика", callback_data="math_introduction"),
+                self.button(text="Specifics of Soviet mathematics", callback_data="math_introduction"),
             ],
             [
-                self.button(text="Разделы математики", callback_data="math_books_lobby")
+                self.button(text="Areas of mathematics", callback_data="math_books_lobby")
             ],
             [
                 self.button(text="⬅️", callback_data="math")
@@ -124,10 +114,10 @@ class InlineKeyboards:
     def math_tasks(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Начать решать задачи", callback_data="math_tasks_start")
+                self.button(text="Start solving problems", callback_data="math_tasks_start")
             ],
             [
-                self.button(text="Таблица рекордов", callback_data="math_tasks_table")
+                self.button(text="Leader board", callback_data="math_tasks_table")
             ],
             [
                 self.button(text="⬅️", callback_data="math")
@@ -144,7 +134,7 @@ class InlineKeyboards:
                 self.button(text="School olympiad level", callback_data="math_tasks_C")
             ],
             [
-                self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
+                self.button(text="I don't want to solve anymore", callback_data="math_tasks_stop")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
