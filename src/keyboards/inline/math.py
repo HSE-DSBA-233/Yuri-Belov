@@ -110,9 +110,9 @@ class InlineKeyboards:
     def math_tasks_start(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Простой уровень", callback_data="math_tasks_easy"),
-                self.button(text="Средний уровень", callback_data="math_tasks_medium"),
-                self.button(text="Продвинутый уровень", callback_data="math_tasks_hard")
+                self.button(text="Простой уровень", callback_data="math_tasks_A"),
+                self.button(text="Средний уровень", callback_data="math_tasks_B"),
+                self.button(text="Продвинутый уровень", callback_data="math_tasks_C")
             ],
             [
                 self.button(text="Уровень Советского пятикласника", callback_data="math_tasks_olympiad"),
@@ -139,37 +139,17 @@ class InlineKeyboards:
         return self.keyboard(inline_keyboard=buttons)
 
 
-    def math_tasks_easy(self) -> InlineKeyboardMarkup:
+    def math_tasks_start_stop(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="Продолжить", callback_data="math_tasks_easy")
+                self.button(text="Простой уровень", callback_data="math_tasks_A"),
+                self.button(text="Средний уровень", callback_data="math_tasks_B"),
+                self.button(text="Продвинутый уровень", callback_data="math_tasks_C")
+
             ],
             [
                 self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
-
-
-    def math_tasks_medium(self) -> InlineKeyboardMarkup:
-        buttons = [
-            [
-                self.button(text="Продолжить", callback_data="math_tasks_medium")
-            ],
-            [
-                self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
-            ]
-        ]
-        return self.keyboard(inline_keyboard=buttons) 
-
-
-    def math_tasks_hard(self) -> InlineKeyboardMarkup:
-        buttons = [
-            [
-                self.button(text="Продолжить", callback_data="math_tasks_hard")
-            ],
-            [
-                self.button(text="Я больше не хочу решать", callback_data="math_tasks_stop")
-            ]
-        ]
-        return self.keyboard(inline_keyboard=buttons) 
+    
