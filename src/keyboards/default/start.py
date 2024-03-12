@@ -10,19 +10,10 @@ class DefaultKeyboards:
         buttons = [
             [
                 self.button(text="Математика"),
-                self.button(text="Программирование")
+                self.button(text="Programming")
             ],
             [
-                self.button(text="О боте")
-            ]
-        ]
-        return self.keyboard(keyboard=buttons, resize_keyboard=True)
-
-
-    def start_about_default_keyboard(self) -> ReplyKeyboardMarkup:
-        buttons = [
-            [
-                self.button(text="Меню")
+                self.button(text="About")
             ]
         ]
         return self.keyboard(keyboard=buttons, resize_keyboard=True)
