@@ -161,7 +161,7 @@ async def refal_recursion_handler(callback: types.CallbackQuery):
 )
 
 # el-76 theory begins here
-@theory_router.callback_query(F.data == "theory_el76")
+@programming_theory_router.callback_query(F.data == "theory_el76")
 async def el76_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -173,7 +173,7 @@ async def el76_handler(callback: types.CallbackQuery):
         parse_mode="MarkdownV2")
 
 
-@theory_router.callback_query(F.data == "el76_history")
+@programming_theory_router.callback_query(F.data == "el76_history")
 async def el76_history_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -189,7 +189,7 @@ async def el76_history_handler(callback: types.CallbackQuery):
 )
 
 
-@theory_router.callback_query(F.data == "el76_syntax")
+@programming_theory_router.callback_query(F.data == "el76_syntax")
 async def el76_syntax_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -218,7 +218,7 @@ async def el76_syntax_handler(callback: types.CallbackQuery):
 
 
 
-@theory_router.callback_query(F.data == "el76_operators")
+@programming_theory_router.callback_query(F.data == "el76_operators")
 async def el76_operators_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
@@ -266,7 +266,7 @@ async def el76_operators_handler(callback: types.CallbackQuery):
 )
 
 
-@theory_router.callback_query(F.data == "el76_examples")
+@programming_theory_router.callback_query(F.data == "el76_examples")
 async def el76_examples_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     await callback.message.edit_text(
