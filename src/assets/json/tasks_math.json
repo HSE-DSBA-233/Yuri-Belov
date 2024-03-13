@@ -64,13 +64,63 @@
   "B": [
     {
       "id": "B1",
-      "question": "What does ln(Hello) return?",
-      "answer": "5"
+      "question": "Solve this limit",
+      "image":"assets/mathImages/B1.png",
+      "answer": "(1-b)/(1-a)"
     },
     {
       "id": "B2",
-      "question": "What does ln(Hello) return?",
-      "answer": "5"
+      "question": "Find the domain of a function. Send it in the next format \n(...<x<... or ...≤x≤...)",
+      "image":"assets/mathImages/B2.png",
+      "answer": "1≤x≤100"
+    },
+    {
+      "id": "B3",
+      "question": "Solve this limit",
+      "image":"assets/mathImages/B3.png",
+      "answer": "6"
+    },
+    {
+      "id": "B4",
+      "question": "Solve this limit. \nUse the following symbol to raise a number to a power ^\nDon't forget to use * sign for mutiplication",
+      "image":"assets/mathImages/B3.png",
+      "answer": "x^2+a*x+(a^2)/3"
+    },
+    {
+      "id": "B5",
+      "question": "Solve this limit",
+      "image":"assets/mathImages/B5.png",
+      "answer": "3" 
+    },
+    {
+      "id": "B6",
+      "question": "Find the length of curve\nFor multiplication use sign *",
+      "image":"assets/mathImages/B6.png",
+      "answer": "6*a" 
+    },
+    {
+      "id": "B7",
+      "question": "Find the length of curve\nFor multiplication use sign *",
+      "image":"assets/mathImages/B7.png",
+      "answer": "8*a" 
+    },
+    {
+      "id": "B8",
+      "question": "Find this limit using integral\nFor π use pi",
+      "image":"assets/mathImages/B8.png",
+      "answer": "2/pi" 
+    },
+    {
+      "id": "B9",
+      "question": "Find this limit using integral\nFor π use pi. For square root use sqrt()",
+      "image":"assets/mathImages/B9.png",
+      "answer": "pi/sqrt(3)" 
+    },
+    {
+      "id": "B10",
+      "question": "Find this limit using integral\nFor π use pi. Use the following symbol to raise a number to a power ^",
+      "image":"assets/mathImages/B10.png",
+      "answer": "(pi^2)/4" 
     }
   ],
   "C": [
