@@ -126,13 +126,63 @@
   "C": [
     {
       "id": "C1",
-      "question": "What is the result of '3 * 5'?",
-      "answer": "15"
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C1.png",
+      "answer": "120"
     },
     {
       "id": "C2",
-      "question": "What is the result of '3 * 5'?",
-      "answer": "15"
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C2.png",
+      "answer": "12"
+    },
+    {
+      "id": "C3",
+      "question": "Find the coordinates\nFor decimal notation use . instead of , e.g\n16.5 - correct | 16,5 - incorrect",
+      "image":"assets/mathImages/C3.png",
+      "answer": "4140.5"
+    },
+    {
+      "id": "C4",
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C4.png",
+      "answer": "123"
+    },
+    {
+      "id": "C5",
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C5.png",
+      "answer": "500"
+    },
+    {
+      "id": "C6",
+      "question": "Solve this problem \nEnter the number of days",
+      "image":"assets/mathImages/C6.png",
+      "answer": "180"
+    },
+    {
+      "id": "C7",
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C7.png",
+      "answer": "998910"
+    },
+    {
+      "id": "C8",
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C8.png",
+      "answer": "1600"
+    },
+    {
+      "id": "C9",
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C9.png",
+      "answer": "20"
+    },
+    {
+      "id": "C10",
+      "question": "Solve this problem",
+      "image":"assets/mathImages/C10.png",
+      "answer": "999"
     }
   ]
 }
