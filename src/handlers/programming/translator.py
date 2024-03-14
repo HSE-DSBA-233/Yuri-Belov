@@ -6,6 +6,7 @@ from openai import OpenAI
 from data.config import conf
 from states.programming_state import ProgrammingTranslatorState
 from aiogram.fsm.context import FSMContext
+from loader import bot
 
 programming_translator_router = Router(name='programming_tasks')
 programming_translator_router.message.filter(ChatTypeFilter(chat_type=["private"]))
@@ -81,6 +82,7 @@ async def programming_translator_el76_handler(callback: types.CallbackQuery, sta
 async def programming_translator_answer_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
     wait_message = await message.answer("One moment, dear comrade, working on it!")
+    await bot.send_chat_action(chat_id=message.from_user.id, action="typing")
     data: dict = await state.get_data()
     answer: str = message.text
     response = programming_translator(data['lang'], answer)
