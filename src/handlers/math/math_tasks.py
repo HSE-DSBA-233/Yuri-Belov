@@ -25,23 +25,26 @@ LOGIC SECTION FOR TASKS
 @math_tasks_router.callback_query(F.data == "math_tasks_table")
 async def math_tasks_table_handler(callback: types.CallbackQuery):
     users = db.get_all_users()
-    table = "🏆 <b>Leader board:</b>\n\n"
+    table = "<b>My cherished leaderboard of brilliant mathematicians:</b>\n\n"
     for user in users:
-        table += f"👤 {user[1]} - {user[2]}\n"
-    await callback.message.answer(table, parse_mode="HTML")
+        table += f"👤 @{user[1]} - {user[2]}\n"
+    await callback.message.edit_text(table, parse_mode="HTML", reply_markup=InlineKeyboards().math_tasks_back())
 
 
 # callback on tasks button from, math menu
 @math_tasks_router.callback_query(F.data == "math_tasks")
 async def math_handler_tasks(callback: types.CallbackQuery):
     handler(__name__, type=callback)
-    await callback.message.edit_text(text="Tasks", reply_markup=InlineKeyboards().math_tasks())
+    await callback.message.edit_text("<b>Tasks!</b>\n\n"
+                                     "Here, you'll find a delightful smorgasbord of challenges that'll tickle your brain cells and leave you chuckling in delight. As an old man who's spent countless hours wrestling with equations, allow me to share a little secret: sometimes, the best way to tackle a problem is with a hearty laugh and a twinkle in your eye! So, let's not take ourselves too seriously and enjoy this mathematical escapade together, eh?", 
+                                     reply_markup=InlineKeyboards().math_tasks(),
+                                     parse_mode="HTML")
 
 
 @math_tasks_router.callback_query(F.data == "math_tasks_start")
 async def math_handler_tasks(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text(text="Choose difficulty:", reply_markup=InlineKeyboards().math_tasks_start())
+    await callback.message.edit_text(text="To make the most of this adventure, kindly select the difficulty that resonates with your current mathematical abilities:", reply_markup=InlineKeyboards().math_tasks_start())
 
 
 # load tasks from JSON and pick random
@@ -52,8 +55,7 @@ def math_tasks_get(user_id: int, level: str) -> dict:
     if unsolved_tasks:
         return random.choice(unsolved_tasks)
     else:
-        return {"error": "All tasks are solved, stay tuned for more!"}
-# check the answer for a task
+        return {"error": "Congratulations, dear comrade! You've successfully solved all the current tasks. Keep your eyes peeled for more intriguing challenges, as I'm constantly working on expanding our collection. Stay tuned, and let's continue this thrilling journey through the world of Soviet programming together!"}
     
 
 def math_tasks_check(task: dict, answer: str) -> str:
@@ -101,31 +103,19 @@ async def programming_tasks_check_handler(message: types.Message, state: FSMCont
             score = 3
         await msg_text.delete()
         await msg_photo.delete()
-        await message.answer(f"<b>✅ Right!</b>\n\n+{score}!", reply_markup=InlineKeyboards().math_tasks_start_stop(), parse_mode="HTML")
+        await message.answer(f"<b>Absolutely correct, comrade!</b>\n\n<b>+{score} points!</b> Keep up the fantastic work, and let's continue to explore the captivating world of Soviet programming together!", reply_markup=InlineKeyboards().math_tasks_start_stop(), parse_mode="HTML")
         db.add_task(user_id, task["id"])
         db.add_score(user_id, score)
     else:
-        await message.answer("❌ Wrong, try again.", reply_markup=InlineKeyboards().math_tasks_start_stop())
-
-
-@math_tasks_router.message(MathState.answer)
-async def programming_tasks_check_handler(message: types.Message, state: FSMContext):
-    handler(__name__, type=message)
-    answer: str = message.text
-    task: dict = await state.get_data()
-    result: bool = math_tasks_check(task, answer)
-    if result:
-        await message.answer("Correct!", reply_markup=InlineKeyboards().math_tasks_start_stop())
-        user_id = message.from_user.id
-        db.add_task(user_id, task["id"])
-        db.add_score(user_id, task["points"])
-    else:
-        await message.answer("Wrong, try again.", reply_markup=InlineKeyboards().math_tasks_start_stop())
+        await message.answer("Not quite right, my friend, give it another go!", reply_markup=InlineKeyboards().math_tasks_start_stop())
 
 
 @math_tasks_router.callback_query(F.data == "math_tasks_stop")
 async def math_tasks_stop_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text(text="Choose section:", reply_markup=InlineKeyboards().math_tasks_start())
+    await callback.message.edit_text("<b>Tasks!</b>\n\n"
+                                     "Here, you'll find a delightful smorgasbord of challenges that'll tickle your brain cells and leave you chuckling in delight. As an old man who's spent countless hours wrestling with equations, allow me to share a little secret: sometimes, the best way to tackle a problem is with a hearty laugh and a twinkle in your eye! So, let's not take ourselves too seriously and enjoy this mathematical escapade together, eh?", 
+                                     reply_markup=InlineKeyboards().math_tasks(),
+                                     parse_mode="HTML")
     await state.clear()
     

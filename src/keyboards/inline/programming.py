@@ -26,9 +26,6 @@ class InlineKeyboards:
             [
                 self.button(text="Code translator", callback_data="programming_translator"),
             ],
-            [
-                self.button(text="AI Soviet Programmer", callback_data="programming_ai")
-            ]
         ]
         return self.keyboard(inline_keyboard=buttons)
     
@@ -42,7 +39,7 @@ class InlineKeyboards:
 
             ],
             [
-                self.button(text="Records", callback_data="programming_tasks_table")
+                self.button(text="Leaderboard", callback_data="programming_tasks_table")
             ],
             [
                 self.button(text="⬅️", callback_data="programming_menu")
@@ -80,10 +77,10 @@ class InlineKeyboards:
                 self.button(text="REFAL-5", callback_data="programming_translator_refal5"),
             ],
             [
-                self.button(text="El-76", callback_data="programming_translator_el76"),
+                self.button(text="RAPIRA", callback_data="programming_translator_rapira"),
             ],
             [
-                self.button(text="RAPIRA", callback_data="programming_translator_rapira"),
+                self.button(text="El-76", callback_data="programming_translator_el76"),
             ],
             [
                 self.button(text="⬅️", callback_data="programming_menu")
