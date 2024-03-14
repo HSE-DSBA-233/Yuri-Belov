@@ -13,14 +13,16 @@ from aiogram.filters import Command
 from utils.logging import handler
 from keyboards.default.start import DefaultKeyboards
 from filters.chat_type import ChatTypeFilter
+from aiogram.fsm.context import FSMContext
 
 start_router = Router(name='start')
 start_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 
 @start_router.message(Command(commands='start'))
-async def start_handler(message: types.Message):
+async def start_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
+    await state.clear()
     await message.answer("<b>I am Yuri Belov.</b>", 
                          reply_markup=DefaultKeyboards().start_default_keyboard(),
                          parse_mode="HTML")
@@ -28,8 +30,9 @@ async def start_handler(message: types.Message):
 
 # Раздел "О боте"
 @start_router.message(F.text == "About")
-async def start_about_handler(message: types.Message):
+async def start_about_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
+    await state.clear()
     await message.answer("<b>About:</b>\n\n" 
                          "Bot was created by HSE DSBA 233 students-geeks in honor of the ORG project: @pvlppv, @gurbanoffn, @makaroshh, @eeleecc",
                          parse_mode="HTML")

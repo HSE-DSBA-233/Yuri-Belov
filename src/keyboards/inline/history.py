@@ -19,6 +19,18 @@ class InlineKeyboards:
     def history_math(self) -> InlineKeyboardMarkup:
         buttons = [
             [
+                self.button(text="The Beginnings", callback_data="history_math_beginnings")
+            ],
+            [
+                self.button(text="The Mathematical-Navigational School", callback_data="history_math_school")
+            ],
+            [
+                self.button(text="Moscow State University", callback_data="history_math_msu")
+            ],
+            [
+                self.button(text="The 20th Century and Beyond", callback_data="history_math_20th")
+            ],
+            [
                 self.button(text="⬅️", callback_data="math")
             ]
         ]
@@ -27,6 +39,18 @@ class InlineKeyboards:
 
     def history_programming(self) -> InlineKeyboardMarkup:
         buttons = [
+            [
+                self.button(text="The Beginnings", callback_data="history_math_beginning")
+            ],
+            [
+                self.button(text="The Mathematical-Navigational School", callback_data="history_math_school")
+            ],
+            [
+                self.button(text="Moscow State University", callback_data="history_math_msu")
+            ],
+            [
+                self.button(text="The 20th Century and Beyond", callback_data="history_math_20th")
+            ],
             [
                 self.button(text="⬅️", callback_data="programming_menu")
             ]

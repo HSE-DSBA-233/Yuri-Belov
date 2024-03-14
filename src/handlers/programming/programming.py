@@ -2,6 +2,7 @@ from aiogram import Router, types, F
 from utils.logging import handler
 from keyboards.inline.programming import InlineKeyboards
 from filters.chat_type import ChatTypeFilter
+from aiogram.fsm.context import FSMContext
 
 programming_router = Router(name='programming')
 programming_router.message.filter(ChatTypeFilter(chat_type=["private"]))
@@ -9,8 +10,9 @@ programming_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 # programming menu
 @programming_router.message(F.text == "Programming")
-async def programming_handler(message: types.Message):
+async def programming_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
+    await state.clear()
     await message.answer("<b>Programming:</b>\n\n"
                          "This is the programming section, my dear comrade! A splendid sanctuary where the marvels of technology come to life, guided by the wisdom of my Soviet heritage. "
                          "Just for you, I've crafted these enchanting buttons below to guide our conversation, choose your desired destination swiftly:\n\n"
