@@ -35,9 +35,9 @@ async def start_about_handler(message: types.Message):
                          parse_mode="HTML")
 
 
-@start_router.message(F.text)
-async def chat_handler(message: types.Message):
-    try:
-        await message.answer("Soon!")
-    except TypeError:
-        await message.answer("Hm, it appears that the message you've provided might not be entirely valid. Give it another go, this time with a slightly different approach.")
+# @start_router.message(F.text)
+# async def chat_handler(message: types.Message):
+#     try:
+#         await message.answer("Soon!")
+#     except TypeError:
+#         await message.answer("Hm, it appears that the message you've provided might not be entirely valid. Give it another go, this time with a slightly different approach.")

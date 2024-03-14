@@ -13,6 +13,7 @@ from aiogram import Bot, Dispatcher, enums
 from data.config import conf
 from handlers import routers
 from utils.logging import set_logger
+from loader import bot
 
 
 async def start_bot() -> None:
@@ -22,7 +23,6 @@ async def start_bot() -> None:
 
     # Initialize bot and dispatcher to create instances that will handle communication with the Telegram API 
     # and manage message routing and processing, respectively
-    bot = Bot(token=conf.bot.token)
     dp = Dispatcher()
 
     # Include routers for handling different types of messages to ensure that incoming messages 
@@ -45,3 +45,4 @@ if __name__ == "__main__":
     # and does not block the main execution thread, enabling efficient handling of incoming messages 
     # and responsiveness to user interactions.
     asyncio.run(start_bot())
+
