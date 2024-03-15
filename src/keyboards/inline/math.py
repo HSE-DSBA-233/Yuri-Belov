@@ -91,7 +91,7 @@ class InlineKeyboards:
                 self.button(text="Number theory", callback_data="math_numberTheory"),
             ],
             [
-                self.button(text="Optimization and calculus of variations", callback_data="math_book_optimization")
+                self.button(text="Optimization and calculus of variations", callback_data="math_book_optimization"),
                 self.button(text="Control and optimization theory", callback_data="math_book_managment"),
             ],
             [
@@ -106,7 +106,7 @@ class InlineKeyboards:
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
-    
+
 
 
 # Keyboard with task page
@@ -168,3 +168,4 @@ class InlineKeyboards:
             ]
         ]
         return self.keyboard(inline_keyboard=buttons)
+ 
