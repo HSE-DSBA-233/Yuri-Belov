@@ -2,7 +2,8 @@ from aiogram.fsm.state import State, StatesGroup
 
 
 class ProgrammingTasksState(StatesGroup):
-    answer = State()
+    A = State()
+    B_and_C = State()
 
 
 class ProgrammingTranslatorState(StatesGroup):

@@ -6,6 +6,7 @@ from openai import OpenAI
 from data.config import conf
 from states.programming_state import ProgrammingTranslatorState
 from aiogram.fsm.context import FSMContext
+from loader import bot
 
 programming_translator_router = Router(name='programming_tasks')
 programming_translator_router.message.filter(ChatTypeFilter(chat_type=["private"]))
@@ -47,46 +48,51 @@ def programming_translator(lang: str, code: str):
 @programming_translator_router.callback_query(F.data == "programming_translator")
 async def programming_translator_handler(callback: types.CallbackQuery):
     handler(__name__, type=callback)
-    await callback.message.edit_text("Choose a soviet language:", reply_markup=InlineKeyboards().programming_translator())
+    await callback.message.edit_text("<b>Code translator!</b>\n\n"
+                                     "And in this section, I'll give it my all, as I attempt to translate your modern programming language into a Soviet one! Yes, it will be challenging for me, and there's a chance that the results might not be entirely accurate. But let's not waste any more time – let's give it a try and see what we can achieve together, comrade! Choose a Soviet programming language I will try to translate to:",
+                                     reply_markup=InlineKeyboards().programming_translator(),
+                                     parse_mode="HTML")
 
 
 @programming_translator_router.callback_query(F.data == "programming_translator_refal5")
 async def programming_translator_refal5_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text("Enter your code snippet:", parse_mode="HTML")
+    await callback.message.edit_text("Please go ahead, my friend, and enter your modern code snippet:", parse_mode="HTML")
     await state.set_state(ProgrammingTranslatorState.code)
     await state.update_data({"lang":"REFAL-5"})
-
-
-@programming_translator_router.callback_query(F.data == "programming_translator_el76")
-async def programming_translator_el76_handler(callback: types.CallbackQuery, state: FSMContext):
-    handler(__name__, type=callback)
-    await callback.message.edit_text("Enter your code snippet:", parse_mode="HTML")
-    await state.set_state(ProgrammingTranslatorState.code)
-    await state.update_data({"lang":"EL-76"})
 
 
 @programming_translator_router.callback_query(F.data == "programming_translator_rapira")
 async def programming_translator_rapira_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text("Enter your code snippet:", parse_mode="HTML")
+    await callback.message.edit_text("Please go ahead, my friend, and enter your modern code snippet:", parse_mode="HTML")
     await state.set_state(ProgrammingTranslatorState.code)
     await state.update_data({"lang":"RAPIRA"})
+
+
+@programming_translator_router.callback_query(F.data == "programming_translator_el76")
+async def programming_translator_el76_handler(callback: types.CallbackQuery, state: FSMContext):
+    handler(__name__, type=callback)
+    await callback.message.edit_text("Please go ahead, my friend, and enter your modern code snippet:", parse_mode="HTML")
+    await state.set_state(ProgrammingTranslatorState.code)
+    await state.update_data({"lang":"EL-76"})
 
 
 @programming_translator_router.message(ProgrammingTranslatorState.code)
 async def programming_translator_answer_handler(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
-    wait_message = await message.answer("Wait, please...")
+    wait_message = await message.answer("One moment, dear comrade, working on it!")
+    await bot.send_chat_action(chat_id=message.from_user.id, action="typing")
     data: dict = await state.get_data()
     answer: str = message.text
     response = programming_translator(data['lang'], answer)
     if any(word in response for word in ["valid", "code"]):
-        await message.answer("❌ That's not a valid code snippet.")
+        await message.answer("Ah, it appears that the code snippet you've provided might not be entirely valid, comrade! Give it another go, this time with a slightly different approach.",
+                             reply_markup=InlineKeyboards().programming_translator_continue())
     elif response == "error":
-        await message.answer("Technical issue, try again later, please.")
+        await message.answer("Oh dear, it appears that our marvelous time-machine chatting device has encountered a minor technical hiccup! I apologize for the inconvenience, my friend. Rest assured, I'll roll up my sleeves and tinker with the gears to fix the issue as soon as possible. In the meantime, please bear with me and try again a bit later. Thank you for your understanding and patience!")
     else:
-        await message.answer(f"Here is your translated code snippet:\n\n```{data['lang']}\n{programming_translator(data['lang'], answer)}```", 
+        await message.answer(f"Voila, comrade\\! I'm thrilled to present you with your Soviet\\-era code snippet\\!\n\n```{data['lang']}\n{programming_translator(data['lang'], answer)}```", 
                              reply_markup=InlineKeyboards().programming_translator_continue(),
                              parse_mode="MarkdownV2")
     await wait_message.delete()
@@ -96,4 +102,7 @@ async def programming_translator_answer_handler(message: types.Message, state: F
 @programming_translator_router.callback_query(F.data == "programming_translator_continue")
 async def programming_translator_continue_handler(callback: types.CallbackQuery, state: FSMContext):
     handler(__name__, type=callback)
-    await callback.message.edit_text("Choose a soviet language:", reply_markup=InlineKeyboards().programming_translator())
+    await callback.message.edit_text("<b>Code translator!</b>\n\n"
+                                     "And in this section, I'll give it my all, as I attempt to translate your modern programming language into a Soviet one! Yes, it will be challenging for me, and there's a chance that the results might not be entirely accurate. But let's not waste any more time – let's give it a try and see what we can achieve together, comrade! Choose a Soviet programming language I will try to translate to:",
+                                     reply_markup=InlineKeyboards().programming_translator(),
+                                     parse_mode="HTML")

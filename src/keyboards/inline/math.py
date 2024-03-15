@@ -66,6 +66,15 @@ class InlineKeyboards:
                 self.button(text="Differential equations", callback_data="math_book_differential"),
             ],
             [
+                self.button(text="Function theory", callback_data="math_functions"),
+                self.button(text="Functional analysis", callback_data="math_book_functionsAnalysis"),
+            ],
+            [
+                self.button(text="Probability theory and mathematical statistics", callback_data="math_book_probability"),
+                self.button(text="Numerical methods", callback_data="math_book_numberMethods"),
+            ],
+            [
+                self.button(text="Discrete math", callback_data="math_book_discrete"),
                 self.button(text="Theory of functions", callback_data="math_functions"),
                 self.button(text="Functional analysis", callback_data="math_book_functionsAnalysis"),
             ],
@@ -82,7 +91,11 @@ class InlineKeyboards:
                 self.button(text="Number theory", callback_data="math_numberTheory"),
             ],
             [
-                self.button(text="Optimization and calculus of variations", callback_data="math_book_optimization"),
+                self.button(text="Optimization and calculus of variations", callback_data="math_book_optimization")
+                self.button(text="Control and optimization theory", callback_data="math_book_managment"),
+            ],
+            [
+                self.button(text="Mathematical Physics", callback_data="math_book_physics"),
                 self.button(text="Theory of management and optimization", callback_data="math_book_managment"),
             ],
             [
@@ -100,8 +113,12 @@ class InlineKeyboards:
     def math_tasks_start(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="High school level", callback_data="math_tasks_A"),
-                self.button(text="University level", callback_data="math_tasks_B"),
+                self.button(text="High school level", callback_data="math_tasks_A")
+            ],
+            [
+                self.button(text="University level", callback_data="math_tasks_B")
+            ],
+            [
                 self.button(text="School olympiad level", callback_data="math_tasks_C")
             ],
             [
@@ -117,7 +134,7 @@ class InlineKeyboards:
                 self.button(text="Start solving problems", callback_data="math_tasks_start")
             ],
             [
-                self.button(text="Leader board", callback_data="math_tasks_table")
+                self.button(text="Leaderboard", callback_data="math_tasks_table")
             ],
             [
                 self.button(text="⬅️", callback_data="math")
@@ -129,8 +146,12 @@ class InlineKeyboards:
     def math_tasks_start_stop(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="High school level", callback_data="math_tasks_A"),
-                self.button(text="University level", callback_data="math_tasks_B"),
+                self.button(text="High school level", callback_data="math_tasks_A")
+            ],
+            [
+                self.button(text="University level", callback_data="math_tasks_B")
+            ],
+            [
                 self.button(text="School olympiad level", callback_data="math_tasks_C")
             ],
             [
@@ -139,3 +160,11 @@ class InlineKeyboards:
         ]
         return self.keyboard(inline_keyboard=buttons)
     
+
+    def math_tasks_back(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="⬅️", callback_data="math_tasks")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)
