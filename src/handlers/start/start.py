@@ -18,7 +18,7 @@ from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 from data.config import conf
 from loader import bot
-
+from aiogram.filters import StateFilter
 
 start_router = Router(name='start')
 start_router.message.filter(ChatTypeFilter(chat_type=["private"]))
@@ -161,7 +161,7 @@ async def command_clear_chat_handler(message: types.Message) -> None:
     await message.answer("The context has been cleared! Yuri forgot your entire dialogue!")
 
 
-@start_router.message(~F.text.in_(["Programming", "Mathematics", "About"]))
+@start_router.message(StateFilter(None), ~F.text.in_(["Programming", "Mathematics", "About"]))
 async def echo_handler(message: types.Message) -> None:
     try:
         user_id = message.from_user.id #getting user id
