@@ -10,7 +10,7 @@ math_router.message.filter(ChatTypeFilter(chat_type=["private"]))
 
 
 # default keyboard on math
-@math_router.message(F.text == "Math")
+@math_router.message(F.text == "Mathematics")
 async def math_handler_menu(message: types.Message, state: FSMContext):
     handler(__name__, type=message)
     await state.clear()
