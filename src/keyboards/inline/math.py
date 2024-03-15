@@ -75,6 +75,15 @@ class InlineKeyboards:
             ],
             [
                 self.button(text="Discrete math", callback_data="math_book_discrete"),
+                self.button(text="Theory of functions", callback_data="math_functions"),
+                self.button(text="Functional analysis", callback_data="math_book_functionsAnalysis"),
+            ],
+            [
+                self.button(text="Probability theory and statistics", callback_data="math_book_probability"),
+                self.button(text="Number methods", callback_data="math_book_numberMethods"),
+            ],
+            [
+                self.button(text="Discrete mathematics", callback_data="math_book_discrete"),
                 self.button(text="Mathematical logic and set theory", callback_data="math_book_logic"),
             ],
             [
@@ -82,11 +91,15 @@ class InlineKeyboards:
                 self.button(text="Number theory", callback_data="math_numberTheory"),
             ],
             [
-                self.button(text="Optimization and calculus of variations", callback_data="math_book_optimization"),
+                self.button(text="Optimization and calculus of variations", callback_data="math_book_optimization")
                 self.button(text="Control and optimization theory", callback_data="math_book_managment"),
             ],
             [
                 self.button(text="Mathematical Physics", callback_data="math_book_physics"),
+                self.button(text="Theory of management and optimization", callback_data="math_book_managment"),
+            ],
+            [
+                self.button(text="Mathematical physics", callback_data="math_book_physics"),
             ],
             [
                 self.button(text="⬅️", callback_data="math_theory")
