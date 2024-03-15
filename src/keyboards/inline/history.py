@@ -22,13 +22,13 @@ class InlineKeyboards:
                 self.button(text="The Beginnings", callback_data="history_math_beginnings")
             ],
             [
-                self.button(text="The Mathematical-Navigational School", callback_data="history_math_school")
-            ],
-            [
                 self.button(text="Moscow State University", callback_data="history_math_msu")
             ],
             [
-                self.button(text="The 20th Century and Beyond", callback_data="history_math_20th")
+                self.button(text="USSR", callback_data="history_math_ussr")
+            ],
+            [
+                self.button(text="Lev Pontryagin", callback_data="history_math_pontryagin")
             ],
             [
                 self.button(text="⬅️", callback_data="math")
@@ -40,16 +40,25 @@ class InlineKeyboards:
     def history_programming(self) -> InlineKeyboardMarkup:
         buttons = [
             [
-                self.button(text="The Beginnings", callback_data="history_math_beginning")
+                self.button(text="Part 1", callback_data="history_programming_part1")
             ],
             [
-                self.button(text="The Mathematical-Navigational School", callback_data="history_math_school")
+                self.button(text="Part 2", callback_data="history_prorgamming_part2")
             ],
             [
-                self.button(text="Moscow State University", callback_data="history_math_msu")
+                self.button(text="⬅️", callback_data="programming_menu")
+            ]
+        ]
+        return self.keyboard(inline_keyboard=buttons)    
+    
+
+    def history_programming(self) -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                self.button(text="Part 1", callback_data="history_programming_part1")
             ],
             [
-                self.button(text="The 20th Century and Beyond", callback_data="history_math_20th")
+                self.button(text="Part 2", callback_data="history_programming_part2")
             ],
             [
                 self.button(text="⬅️", callback_data="programming_menu")
