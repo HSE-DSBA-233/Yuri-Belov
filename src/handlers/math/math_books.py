@@ -89,8 +89,7 @@ async def send_pdf(callback: types.CallbackQuery):
 async def send_pdf(callback: types.CallbackQuery):
     handler(__name__, type=callback)
     msg = await callback.message.answer("I have a special book for this topic! Catch, I'm sending it your way...")
-    await callback.message.answer_document(FSInputFile(path="assets/mathBooks/differentialPt1.pdf"), caption="ЛЕКЦИИ ПО ОБЫКНОВЕННЫМ ДИФФЕРЕНЦИАЛЬНЫМ УРАВНЕНИЯМ Ч.1 Мамонтов")
-    await callback.message.answer_document(FSInputFile(path="assets/mathBooks/differentialPt2.pdf"), caption="ЛЕКЦИИ ПО ОБЫКНОВЕННЫМ ДИФФЕРЕНЦИАЛЬНЫМ УРАВНЕНИЯМ Ч.2 Мамонтов")
+    await callback.message.answer_document(FSInputFile(path="assets/mathBooks/Filippov-vvedenie-v-teoriyu-differencialnyh-uravnenij.pdf"), caption="А. Ф. Филиппов.\n Введение в теорию дифференциальных уравнений.")
     await msg.delete()
 
 
