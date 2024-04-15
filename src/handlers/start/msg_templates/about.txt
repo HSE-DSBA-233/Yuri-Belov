@@ -1,0 +1,22 @@
+<b>About:</b>
+This bot is a chat with a scientist from the past - <b>Yuri Belov.</b>   
+
+
+There are different sections of this bot:
+
+<b>Chat</b>
+You can talk with Yuri about anything you want - he is very curious to speak with someone from the future. 
+You can ask him about his life, or about mathematics and computer science. He is quite a catch!
+But keep in mind - this time machine does not allow cyrillic symbols, so you can communicate only in English.
+
+<b>Mathematics</b>
+Here you can learn about the history of mathematics in Russia, or get some theoretical knowledge. Yuri will gladly share some books form his personal library.
+Additionaly, you can challenge yourself by some tasks with various levels of difficulty and compete with others. Your progress will be displayed in the leaderboard.
+
+<b>Programming</b>
+Along with the history of programming, you can learn the basics of some Soviet languages: REFAL-5, EL-76 and RAPIRA.
+There is a contest with the programming tasks, featuring a leaderboard as well.
+Additionaly, you can try our experimental feature: code translator. You just send code in Python or C++ and bot gives you its equivalent in Soviet programming language.
+
+
+<i>Bot was created by HSE DSBA students in honor of the FRS project: @pvlppv, @gurbanoffn, @makaroshh, @eeleecc</i>
