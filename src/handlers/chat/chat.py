@@ -8,7 +8,7 @@ default_prompt = [{"role":"system", "content":SYS_MESSAGE}]
 
 # all the dialogues with users will be stored here, with user id as a key
 contexts = dict()
-model = "databricks/dbrx-instruct"  # which model will api access.
+model = "meta-llama/Meta-Llama-3-70B-Instruct"  # which model will api access.
 client = OpenAI(
         api_key="ZWLcFFI9aMVFmki2078GdFNLfu4MkT38",
         base_url="https://api.deepinfra.com/v1/openai")

@@ -86,3 +86,18 @@ async def chat_handler(message: types.Message) -> None: # handling general chat 
     except TypeError as e: # just in case something goes wrong
         print(e)
         await message.answer("There's been an error. Repeat your message again, please.")
+
+from pathlib import Path
+from aiogram.types import ContentType, File, Message
+
+async def handle_file(file: File, file_name: str, path: str):
+    Path(f"{path}").mkdir(parents=True, exist_ok=True)
+
+    await bot.download_file(file_path=file.file_path, destination=f"{path}/{file_name}")
+
+@start_router.message(content_types=[ContentType.VOICE])
+async def voice_message_handler(message: Message):
+    voice = await message.voice.get_file()
+    path = "/files/voices"
+
+    await handle_file(file=voice, file_name=f"{voice.file_id}.ogg", path=path)
